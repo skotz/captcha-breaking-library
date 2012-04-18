@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScottClayton.CAPTCHA</RootNamespace>
+    <AssemblyName>ScottClayton.CAPTCHA</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge.Imaging, Version=2.2.4.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AForge.NET Framework-2.2.4-(libs only)\Release\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="ContourAnalysis, Version=1.0.0.15900, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\ContourAnalysis\CAProcessing\bin\Release\ContourAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="ContourAnalysisProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\ContourAnalysis\CAProcessing\bin\Release\ContourAnalysisProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV">
+      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CAPTCHA\CAPTCHABreaker.cs" />
+    <Compile Include="CAPTCHA\Exceptions.cs" />
+    <Compile Include="CAPTCHA\SolutionSet.cs" />
+    <Compile Include="CAPTCHA\Solver.cs" />
+    <Compile Include="Image\BitmapVector.cs" />
+    <Compile Include="Image\BitmapVectorCollection.cs" />
+    <Compile Include="Image\Color\IColor.cs" />
+    <Compile Include="Image\Color\LAB.cs" />
+    <Compile Include="Segmentation\BlobSegmentMethod.cs" />
+    <Compile Include="Image\Exceptions.cs" />
+    <Compile Include="Segmentation\HistogramSegmentMethod.cs" />
+    <Compile Include="Image\ImageExtensions.cs" />
+    <Compile Include="Image\ImageFunctions.cs" />
+    <Compile Include="Image\Segmenter.cs" />
+    <Compile Include="Image\SegmentMethod.cs" />
+    <Compile Include="Neural\ActivationFunctions.cs" />
+    <Compile Include="Neural\Arguments.cs" />
+    <Compile Include="Neural\DoubleVector.cs" />
+    <Compile Include="Neural\DoubleVectorList.cs" />
+    <Compile Include="Neural\Exceptions.cs" />
+    <Compile Include="Neural\NNVector.cs" />
+    <Compile Include="Neural\Pattern.cs" />
+    <Compile Include="Neural\PatternResult.cs" />
+    <Compile Include="Solvers\BitmapSubtractionSolver.cs" />
+    <Compile Include="Solvers\ContourAnalysisSolver.cs" />
+    <Compile Include="Solvers\MultiNeuralNetSolver.cs" />
+    <Compile Include="Solvers\HistogramSolver.cs" />
+    <Compile Include="Solvers\SimpleNeuralNetSolver.cs" />
+    <Compile Include="Neural\SimpleNeuralNetwork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Compression.cs" />
+    <Compile Include="Utility\ConsoleProgress.cs" />
+    <Compile Include="Utility\ConsoleSpinner.cs" />
+    <Compile Include="Utility\Extensions.cs" />
+    <Compile Include="Utility\Message.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="opencv_core220.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="opencv_highgui220.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="opencv_imgproc220.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
