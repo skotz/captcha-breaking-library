@@ -36,19 +36,19 @@
       <HintPath>..\AForge.NET\Release\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="ContourAnalysis, Version=1.0.0.15900, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ContourAnalysis\CAProcessing\bin\Release\ContourAnalysis.dll</HintPath>
+      <HintPath>..\Emgu.CV\ContourAnalysis.dll</HintPath>
     </Reference>
     <Reference Include="ContourAnalysisProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\ContourAnalysis\CAProcessing\bin\Release\ContourAnalysisProcessing.dll</HintPath>
+      <HintPath>..\Emgu.CV\ContourAnalysisProcessing.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV">
-      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.CV.dll</HintPath>
+    <Reference Include="Emgu.CV, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\Emgu.CV\Emgu.CV.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.UI">
-      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.CV.UI.dll</HintPath>
+    <Reference Include="Emgu.CV.UI, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\Emgu.CV\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.Util">
-      <HintPath>..\..\..\..\..\Downloads\ContourAnalysis(1)\ContourAnalysis\CAProcessing\bin\Release\Emgu.Util.dll</HintPath>
+    <Reference Include="Emgu.Util, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <HintPath>..\Emgu.CV\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
