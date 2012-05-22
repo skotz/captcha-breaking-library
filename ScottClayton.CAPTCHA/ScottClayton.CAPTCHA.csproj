@@ -33,8 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Imaging, Version=2.2.4.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AForge.NET Framework-2.2.4-(libs only)\Release\AForge.Imaging.dll</HintPath>
+      <HintPath>..\AForge.NET\Release\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="ContourAnalysis, Version=1.0.0.15900, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\ContourAnalysis\CAProcessing\bin\Release\ContourAnalysis.dll</HintPath>
