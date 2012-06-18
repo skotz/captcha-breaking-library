@@ -130,6 +130,9 @@ namespace SKOTDOC
 
                 using (StreamWriter w = new StreamWriter(args[1], false))
                 {
+                    // Google Code wiki labels
+                    w.WriteLine("#labels Featured,Phase-Implementation");
+
                     foreach (Section s in sections)
                     {
                         w.WriteLine(String.Format("=_{0}_ Section=", s.Name));
@@ -141,12 +144,13 @@ namespace SKOTDOC
 
                         foreach (Function f in s.Functions)
                         {
-                            w.WriteLine(String.Format("=={0}==", "{{{" + f.Name + "}}}"));
-                            w.WriteLine("*Description:* {0}", f.Description);
+                            w.WriteLine("----");
+                            w.WriteLine(String.Format("=={0}==", f.Name));
+                            w.WriteLine("{0}", f.Description);
 
                             foreach (Overload o in f.Overloads)
                             {
-                                w.Write(String.Format(" # {{{{{{{0}", f.Name));
+                                w.Write(String.Format("*<code language=\"cobol\">{0}", f.Name));
                                 if (o.Arguments.Count > 0)
                                 {
                                     foreach (Argument a in o.Arguments)
@@ -154,15 +158,36 @@ namespace SKOTDOC
                                         w.Write(String.Format(", {0}", a.Name));
                                     }
                                 }
-                                w.WriteLine("}}}");
+                                w.WriteLine("</code>*");
+                                bool both = !String.IsNullOrEmpty(o.Description) && o.Arguments.Count > 0;
                                 if (!String.IsNullOrEmpty(o.Description))
                                 {
-                                    w.WriteLine(String.Format("  * {0}", o.Description));
+                                    w.WriteLine();
+                                    w.WriteLine("<table><tr><td colspan=\"2\">*Description*</td></tr>");
+                                    w.Write("<tr><td><pre>   </pre></td><td>");
+                                    w.Write(String.Format("_{0}_", o.Description));
+                                    w.WriteLine("</td></tr>");
+                                    if (!both)
+                                    {
+                                        w.WriteLine("</table>");
+                                    }
                                 }
-                                foreach (Argument a in o.Arguments)
+                                if (o.Arguments.Count > 0)
                                 {
-                                    w.WriteLine(String.Format("  * _{0}_ = {1}", a.Name, a.Description));
+                                    w.WriteLine();
+                                    if (!both)
+                                    {
+                                        w.WriteLine("<table>");
+                                    }
+                                    w.WriteLine("<tr><td colspan=\"2\">*Parameters*</td></tr>");
+                                    w.WriteLine("<tr><td><pre>   </pre></td><td>");
+                                    foreach (Argument a in o.Arguments)
+                                    {
+                                        w.WriteLine(String.Format("|| {0} || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                    }
+                                    w.WriteLine("</td></tr></table>");
                                 }
+                                w.WriteLine();
                             }
                         }
                     }
