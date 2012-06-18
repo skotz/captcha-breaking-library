@@ -9,6 +9,11 @@ using ScottClayton.CAPTCHA.Utility;
 using ScottClayton.Neural;
 using System.IO;
 
+//
+// Note: Anything prefixed with the SKOTDOC command is for the automatic documentation generator for the Wiki page on Google Docs.
+//
+// #SKOTDOC.DEFINESECTION Image These are the functions that are placed between the {{{DEFINEPRECONDITIONS}}} and {{{ENDPRECONDITIONS}}} commands. They are run for each image in the set to precondition the image before trying to segment out individual letters.
+
 namespace ScottClayton.Interpreter
 {
     public class CaptchaInterpreter
@@ -549,85 +554,135 @@ namespace ScottClayton.Interpreter
 
                     switch (args.GetArg(0))
                     {
+                        // #SKOTDOC.BLOCKSTART RESIZE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Resize the image to a specified width and height.
                         case "RESIZE":
                             int rswidth = args.GetArg(1).ToInt();
                             int rsheight = args.GetArg(2).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Resize each image to a specified width and height.
                                 case 2:
+                                    // #SKOTDOC.FUNCARG Width The width to resize image to.
+                                    // #SKOTDOC.FUNCARG Height The height to resize image to.
                                     s.Resize(rswidth, rsheight);
                                     Out("Image Resized to " + rswidth + "x" + rsheight);
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to RESIZE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART ERODE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Erodes the edges of blobs within an image.
                         case "ERODE":
                             int etimes = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Erode the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by White.
                                 case 0:
                                     s.ErodeShapes(Color.White);
                                     Out("Image Edges Eroded");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Erode the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by a given color.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG BackgroundColor The color of the background that surrounds the individual blobs in the image.
                                     for (int i = 0; i < etimes; i++)
                                     {
                                         s.ErodeShapes(Color.White);
                                     }
                                     Out("Image Edges Eroded");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to ERODE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART GROW
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Grow the size of all blobs in the image by one pixel.
                         case "GROW":
                             int gtimes = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Grow the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by White.
                                 case 0:
                                     s.GrowShapes(Color.White);
                                     Out("Image Edges Grown");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Grow the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by a given color.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG BackgroundColor The color of the background that surrounds the individual blobs in the image.
                                     for (int i = 0; i < gtimes; i++)
                                     {
                                         s.GrowShapes(Color.White);
                                     }
                                     Out("Image Edges Grown");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to GROW");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART OUTLINE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Performs a convolutional filter on the image that outlines edges.
                         case "OUTLINE":
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Outline all edges in the image using a convolutional filter.
                                 case 0:
                                     s.Outline();
                                     Out("Image Outline Filter Applied");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to OUTLINE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART SUBTRACT
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Perform a pixel-by-pixel subtraction of a given image from the working image and set each pixel value as the difference between the two.
                         case "SUBTRACT":
                             string img = args.GetQuotedArg(1);
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Subtract one image from another.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG ImageLocation The absolute or relative location to the image to subtract from the working image.
                                     Bitmap imageToSub = null;
                                     lock (subtractionImages)
                                     {
@@ -645,47 +700,74 @@ namespace ScottClayton.Interpreter
                                     s.Subtract(imageToSub);
                                     Out("Image Subtracted");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to SUBTRACT");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART MEDIAN
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Perform a convolutional median filter on the image.
                         case "MEDIAN":
                             int mtimes = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Perform a convolutional median filter on the image one time.
                                 case 0:
                                     s.Median();
                                     Out("Median Filter Applied");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Perform a convolutional median filter on the image several times.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG NumTimes The number of times to apply the Median filter to the image.
                                     for (int i = 0; i < mtimes; i++)
                                     {
                                         s.Median();
                                     }
                                     Out("Median Filter Applied");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to MEDIAN");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART INVERT
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Invert the colors in the image.
                         case "INVERT":
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Invert the colors in the image.
                                 case 0:
                                     s.Invert();
                                     Out("Image Inverted");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to INVERT");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART CROP
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Crop the image.
                         case "CROP":
                             int cx = args.GetArg(1).ToInt();
                             int cy = args.GetArg(2).ToInt();
@@ -694,49 +776,85 @@ namespace ScottClayton.Interpreter
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Crop the image to a given rectangle.
                                 case 4:
+                                    // #SKOTDOC.FUNCARG X The left side of the rectangle.
+                                    // #SKOTDOC.FUNCARG Y The top of the rectangle.
+                                    // #SKOTDOC.FUNCARG Width The width of the rectangle.
+                                    // #SKOTDOC.FUNCARG Height The height of the rectangle.
                                     s.Crop(new Rectangle(cx, cy, cw, ch));
                                     Out("Image Cropped");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to CROP");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART BILATERALSMOOTH
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Performs a bilateral smoothing (edge preserving smoothing) and noise reduction filter on an image.
                         case "BILATERALSMOOTH":
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Perfrom an edge preserving smoothing algorithm.
                                 case 0:
                                     s.EdgePreservingSmooth();
                                     Out("Image Smoothed");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to BILATERALSMOOTH");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART COLORFILLBLOBS
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Fill each unique blob in an image with a random color.
+                        // #SKOTDOC.BLOCKDESC A group of adjacent pixels is considered a single blob when they are all similar to each other in the L`*`a`*`b`*` color space below a given threshold.
+                        // #SKOTDOC.BLOCKDESC In the L`*`a`*`b`*` color space, a threshold of 2.3 is considered to be a change "just noticible to the human eye."
                         case "COLORFILLBLOBS":
                             double cfbtolerance = args.GetArg(1).ToDouble();
                             double cfbbkgtol = args.GetArg(2).ToDouble();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Fill all blobs within a 1.0 distance in the L`*`a`*`b`*` colorspace with a random color.
                                 case 0:
                                     s.ColorFillBlobs(1.0, Color.White, 1.0);
                                     Out("Blobs within 1.00 tolerance (L*a*b* color space) filled");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Fill all blobs within a given distance in the L`*`a`*`b`*` colorspace with a random color.
                                 case 2:
+                                    // #SKOTDOC.FUNCARG ColorTolerance The maximum Delta E difference between two (L`*`a`*`b`*`) colors to allow when filling a blob. I.E., the colors have to be at most this close together to be considered to be in the same blob.
+                                    // #SKOTDOC.FUNCARG BackgroundTolerance The maximum Delta E difference between a pixel (L`*`a`*`b`*`) and the background to allow when filling.
                                     s.ColorFillBlobs(cfbtolerance, Color.White, cfbbkgtol);
                                     Out("Blobs within " + cfbtolerance.ToString("0.00") + " tolerance (L*a*b* color space) filled");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to COLORFILLBLOBS");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART REMOVESMALLBLOBS
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Remove blobs (by filling them with the background color) from an image that are too small.
                         case "REMOVESMALLBLOBS":
                             int rsbcount = args.GetArg(1).ToInt();
                             int rsbwidth = args.GetArg(2).ToInt();
@@ -745,97 +863,166 @@ namespace ScottClayton.Interpreter
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Remove blobs from an image that are too small by either pixel count or X and Y dimensions.
                                 case 3:
+                                    // #SKOTDOC.FUNCARG MinPixelCount The smallest number of pixels a blob can be made of.
+                                    // #SKOTDOC.FUNCARG MinWidth The smallest width a blob can be.
+                                    // #SKOTDOC.FUNCARG MinHeight The smallest height a blob can be.
                                     s.RemoveSmallBlobs(rsbcount, rsbwidth, rsbheight, Color.White);
                                     Out("Small blobs removed from image");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Fill all blobs within a given distance in the L`*`a`*`b`*` colorspace with a random color.
                                 case 4:
+                                    // #SKOTDOC.FUNCARG MinPixelCount The smallest number of pixels a blob can be made of.
+                                    // #SKOTDOC.FUNCARG MinWidth The smallest width a blob can be.
+                                    // #SKOTDOC.FUNCARG MinHeight The smallest height a blob can be.
+                                    // #SKOTDOC.FUNCARG ColorTolerance The RGB tolerance in color when flood filling
                                     s.RemoveSmallBlobs(rsbcount, rsbwidth, rsbheight, Color.White, rsbtolerance);
                                     Out("Small blobs removed from image");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to REMOVESMALLBLOBS");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART BLACKANDWHITE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Convert the image to black and white, where anything not white turns black (even the color #FEFEFE).
+                        // #SKOTDOC.BLOCKDESC If you need to choose the threshold yourself, then see BINARIZE.
                         case "BLACKANDWHITE":
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Flatten an image to black and white.
                                 case 0:
                                     s.BlackAndWhite();
                                     Out("Image binarized to black and white");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to BLACKANDWHITE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART BINARIZE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Convert the image to black and white, where anything above a certain threshold is turned white.
                         case "BINARIZE":
                             int thresh = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Convert the image to black and white, where anything above a given threshold is turned white.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG Threshold A threshold value between 0 and 255 that determines what colors turn black and which turn white.
                                     s.Binarize(thresh);
                                     Out("Image binarized to black and white");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to BINARIZE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART REMOVENONCOLOR
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC White out all pixels that are not a color (any shade of grey). (Useful when a CAPTCHA only colors the letters and not the background.)
                         case "REMOVENONCOLOR":
                             int dist = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Remove all grayscale colors from the image leaving only colors.
                                 case 0:
                                     s.RemoveNonColor(3);
                                     Out("All grayscale colors removed from image");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Remove all colors withing a certain threshold of a shade of gray from the image leaving only colors.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG Distance The threshold value which determines how close a color has to be to gray to be removed.
                                     s.RemoveNonColor(dist);
                                     Out("All grayscale colors removed from image");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to REMOVENONCOLOR");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART KEEPONLYMAINCOLOR
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Finds the color that occurrs most often in the image and removes all other colors that are not the most common color. 
+                        // #SKOTDOC.BLOCKDESC This is great if the main CAPTCHA text is all one color and that text always represents the most common color in the image (in which case this function single-handedly segments the letters from the background).
                         case "KEEPONLYMAINCOLOR":
                             int th = args.GetArg(1).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Find the color that occurrs most often in the image within a certain threshold and remove all other colors that are not withing a given threshold from that color.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG Threshold The threshold value which determines how close a color has to be to be kept.
                                     s.KeepOnlyMostCommonColor(th);
                                     Out("All but the most common color removed");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to KEEPONLYMAINCOLOR");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART SAVESAMPLE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Save a sample of the working image for debugging purposes. This is helpful when writing a script, as you can see every step along the way if you wish.
                         case "SAVESAMPLE":
                             string filename = args.GetQuotedArg(1);
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Save a sample of the working image.
                                 case 1:
+                                    // #SKOTDOC.FUNCARG FileLocation The name and location of where to save the image to.
                                     s.TrySave(filename);
                                     Out("Image saved as " + args.GetArg(1));
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to SAVESAMPLE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART MEANSHIFT
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Apply a mean shift filter to the image. This will effectively flatten out color groups within a certain tolerance.
                         case "MEANSHIFT":
                             int msiterations = args.GetArg(1).ToInt();
                             int msradius = args.GetArg(2).ToInt();
@@ -843,36 +1030,61 @@ namespace ScottClayton.Interpreter
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Apply a 1 iteration mean shift filter with a radius of 1 and a tolerance of 1.
                                 case 0:
                                     s.MeanShiftFilter(1, 1, 1);
                                     Out("Mean Shift Filter (" + msiterations + " iterations)");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Apply a mean shift filter a given number of times with a given radius and a given tolerance.
                                 case 3:
+                                    // #SKOTDOC.FUNCARG Iterations The number of times to repeat the filter on the image.
+                                    // #SKOTDOC.FUNCARG Radius The radius of the filter.
+                                    // #SKOTDOC.FUNCARG Tolerance The tolerance that determines how close in color pixels have to be if they are to be considered in the same group.
                                     s.MeanShiftFilter(msiterations, msradius, mstolerance);
                                     Out("Mean Shift Filter (" + msiterations + " iterations)");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to MEANSHIFT");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART FILLWHITE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Fill a color into a region of an image.
                         case "FILLWHITE":
                             int fwx = args.GetArg(1).ToInt();
                             int fwy = args.GetArg(2).ToInt();
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Fill the background color into a region of an image.
                                 case 2:
+                                    // #SKOTDOC.FUNCARG X The X location of the region to start filling from.
+                                    // #SKOTDOC.FUNCARG Y The Y location of the region to start filling from.
                                     s.FloodFill(new Point(fwx, fwy), 1, Color.White);
                                     Out("Point flood filled with white");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to MEANSHIFT");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART CONVOLUTE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Perform a convolutional filter on the image.
                         case "CONVOLUTE":
                             int c_a = args.GetArg(1).ToInt();
                             int c_b = args.GetArg(2).ToInt();
@@ -886,34 +1098,68 @@ namespace ScottClayton.Interpreter
 
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Perform a convolutional filter on the image with a 3x3 kernel.
                                 case 9:
+                                    // #SKOTDOC.FUNCARG A1 The upper-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG A2 The upper-middle value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG A3 The upper-right value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG B1 The middle-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG B2 The center value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG B3 The middle-right value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG C1 The lower-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG C2 The lower-middle value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARG C3 The lower-right value of the 3x3 kernel.
                                     s.ConvolutionFilter(c_a, c_b, c_c, c_d, c_e, c_f, c_g, c_h, c_i);
                                     Out("Convolution filter applied to image.");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to CONVOLUTE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART HISTOGRAMROTATE
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Rotate an image using trial and error until a best angle is found (measured by a vertical histogram). 
+                        // #SKOTDOC.BLOCKDESC Use this when an image has slanted letters and you want them to be right side up.
                         case "HISTOGRAMROTATE":
                             switch (args.Count - 1)
                             {
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Rotate an image using trial and error until a best angle is found (measured by a vertical histogram). 
                                 case 0:
                                     s.ResizeRotateCut();
                                     Out("Image rotated until best histogram was found");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Rotate an image using trial and error until a best angle is found (measured by a vertical histogram). 
                                 case 1:
+                                    // #SKOTDOC.FUNCARG TRUE Pass any value here and the function will overlay the resulting image with a completely useless (albeit cool to look at) histogram graph.
                                     s.ResizeRotateCut(true);
                                     Out("Image rotated until best histogram was found (HISTOGRAM DEBUG OVERLAY APPLIED)");
                                     break;
+                                // #SKOTDOC.FUNCEND
+
                                 default:
                                     Error("Wrong number of arguments in call to SAVESAMPLE");
                                     break;
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
+                        // #SKOTDOC.BLOCKSTART WAIT
+                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKDESC Wait for a key press from the user to continue.
                         case "WAIT":
+                            // #SKOTDOC.FUNCSTART
+                            // #SKOTDOC.FUNCDESC Wait for a key press from the user to continue.
+                            // #SKOTDOC.FUNCEND
                             Console.WriteLine("Press a key to continue.");
                             try
                             {
@@ -924,6 +1170,7 @@ namespace ScottClayton.Interpreter
                                 Console.Read();
                             }
                             break;
+                        // #SKOTDOC.BLOCKEND
 
                         default:
                             Error("Unknown precondition command \"" + args.GetArg(0) + "\"");

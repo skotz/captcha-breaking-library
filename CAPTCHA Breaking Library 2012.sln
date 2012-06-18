@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaker IDE", "CAPT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaker GUI", "CAPTCHA Breaker Compiled\CAPTCHA Breaker GUI.csproj", "{469CBBE7-9115-4B07-B118-FA1FF6A34278}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKOTDOC", "SKOTDOC\SKOTDOC.csproj", "{646B8EEC-54E2-4309-9DC3-59702AC93F16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,16 @@ Global
 		{469CBBE7-9115-4B07-B118-FA1FF6A34278}.Release|Mixed Platforms.Build.0 = Release|x86
 		{469CBBE7-9115-4B07-B118-FA1FF6A34278}.Release|x86.ActiveCfg = Release|x86
 		{469CBBE7-9115-4B07-B118-FA1FF6A34278}.Release|x86.Build.0 = Release|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Debug|x86.ActiveCfg = Debug|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Debug|x86.Build.0 = Debug|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Release|Any CPU.ActiveCfg = Release|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Release|Mixed Platforms.Build.0 = Release|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Release|x86.ActiveCfg = Release|x86
+		{646B8EEC-54E2-4309-9DC3-59702AC93F16}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
