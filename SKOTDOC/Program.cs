@@ -13,6 +13,8 @@ namespace SKOTDOC
             Console.WriteLine("SKOTDOC v1.0 - Scott Clayton 2012");
             Console.WriteLine("For generating documentation in Wiki format for the CAPTCHA Breaking Language");
 
+            string verbatim = "";
+
             // Get the list of documented functions
             List<Section> sections = new List<Section>();
             if (args.Length == 2)
@@ -57,6 +59,9 @@ namespace SKOTDOC
                                 {
                                     case "DEFINESECTION":
                                         sections.Add(new Section(data));
+                                        break;
+                                    case "VERBATIM":
+                                        verbatim += data + "\n\n";
                                         break;
                                     case "BLOCKSTART":
                                         inBlock = true;
@@ -104,6 +109,12 @@ namespace SKOTDOC
                                             current.Overloads[current.Overloads.Count - 1].Description = data;
                                         }
                                         break;
+                                    case "LITERAL":
+                                        if (inFunction)
+                                        {
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, true));
+                                        }
+                                        break;
                                     case "FUNCARG":
                                         if (inFunction)
                                         {
@@ -133,8 +144,19 @@ namespace SKOTDOC
                     // Google Code wiki labels
                     w.WriteLine("#labels Featured,Phase-Implementation");
 
+                    if (verbatim.Length > 0)
+                    {
+                        w.WriteLine();
+                        w.WriteLine(verbatim);
+                        w.WriteLine();
+                    }
+
+                    w.WriteLine("<wiki:toc max_depth=\"2\" />");
+
                     foreach (Section s in sections)
                     {
+                        w.WriteLine();
+                        w.WriteLine("----");
                         w.WriteLine(String.Format("=_{0}_ Section=", s.Name));
                         w.WriteLine("{0}", s.Description);
                         w.WriteLine();
@@ -155,7 +177,14 @@ namespace SKOTDOC
                                 {
                                     foreach (Argument a in o.Arguments)
                                     {
-                                        w.Write(String.Format(", {0}", a.Name));
+                                        if (a.Literal)
+                                        {
+                                            w.Write(String.Format(", {0}", a.Name));
+                                        }
+                                        else
+                                        {
+                                            w.Write(String.Format(", {0}", a.Name));
+                                        }
                                     }
                                 }
                                 w.WriteLine("</code>*");
@@ -183,7 +212,14 @@ namespace SKOTDOC
                                     w.WriteLine("<tr><td><pre>   </pre></td><td>");
                                     foreach (Argument a in o.Arguments)
                                     {
-                                        w.WriteLine(String.Format("|| {0} || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        if (a.Literal)
+                                        {
+                                            w.WriteLine(String.Format("|| _{0}_ || *Literal Value* - {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
+                                        else
+                                        {
+                                            w.WriteLine(String.Format("|| {0} || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
                                     }
                                     w.WriteLine("</td></tr></table>");
                                 }
@@ -250,11 +286,13 @@ namespace SKOTDOC
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool Literal { get; set; }
 
-        public Argument(string data)
+        public Argument(string data, bool literal = false)
         {
             Name = data.Split(' ')[0];
             Description = data.Substring(data.IndexOf(" ") + 1);
+            Literal = literal;
         }
     }
 }

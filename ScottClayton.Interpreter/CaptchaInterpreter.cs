@@ -12,7 +12,14 @@ using System.IO;
 //
 // Note: Anything prefixed with the SKOTDOC command is for the automatic documentation generator for the Wiki page on Google Docs.
 //
-// #SKOTDOC.DEFINESECTION Image These are the functions that are placed between the {{{DEFINEPRECONDITIONS}}} and {{{ENDPRECONDITIONS}}} commands. They are run for each image in the set to precondition the image before trying to segment out individual letters.
+// #SKOTDOC.DEFINESECTION Setup These are the functions that are placed towards the top of CBL scripts. They set up the methods that will be used to segment and untimately solve the CAPTCHA images.
+// #SKOTDOC.DEFINESECTION Preprocess These are the functions that are placed between the {{{DEFINEPRECONDITIONS}}} and {{{ENDPRECONDITIONS}}} commands. They are run for each image in the set to precondition the image before trying to segment out individual letters.
+// #SKOTDOC.DEFINESECTION Working These are the functions that are used towards the end of CBL scripts. Most of the functions in this group are used temporarily while developing, testing, or measuring the effectiveness of the script.
+//
+// #SKOTDOC.VERBATIM =CBL Syntax Documentation= 
+// #SKOTDOC.VERBATIM Here is the basic documentation for each CBL (CAPTCHA Breaking Language) command currently available within the scripting language (there is more you can access when using the .NET library directly). 
+// #SKOTDOC.VERBATIM The plan is to have a programming guide complete with examples and a program structure guide in the near future, but that is dependent on outside forces at the moment. 
+//
 
 namespace ScottClayton.Interpreter
 {
@@ -116,10 +123,17 @@ namespace ScottClayton.Interpreter
                     {
                         switch (args.GetArg(0))
                         {
+                            // #SKOTDOC.BLOCKSTART ENDPRECONDITIONS
+                            // #SKOTDOC.BLOCKTYPE Setup
+                            // #SKOTDOC.BLOCKDESC End the preconditioning loop block.
+                            // #SKOTDOC.FUNCSTART
+                            // #SKOTDOC.FUNCDESC End the preconditioning loop block.
                             case "ENDPRECONDITIONS":
                                 gatheringPreconditions = false;
                                 Out("Preconditions loaded");
                                 break;
+                            // #SKOTDOC.FUNCEND
+                            // #SKOTDOC.BLOCKEND
 
                             default:
                                 PreconditionCode.Add(command);
@@ -130,27 +144,49 @@ namespace ScottClayton.Interpreter
                     {
                         switch (args.GetArg(0))
                         {
+                            // #SKOTDOC.BLOCKSTART SETMODE
+                            // #SKOTDOC.BLOCKTYPE Setup
+                            // #SKOTDOC.BLOCKDESC Set the level of debugger output to the screen when the script is run in a console.
                             case "SETMODE":
                                 switch (args.GetArg(1, "WARN").ToUpper())
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Set the level of debugger output to the screen when the script is run in a console.
+                                    // #SKOTDOC.LITERAL WARN Only output error or warning messages.
                                     case "WARN":
                                         mode = MODE.WARN;
                                         Out("Mode set to WARN");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Set the level of debugger output to the screen when the script is run in a console.
+                                    // #SKOTDOC.LITERAL QUIET Do not print any information to the screen unless something fatal happened.
                                     case "QUIET":
                                         mode = MODE.QUIET;
                                         Out("Mode set to QUIET");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Set the level of debugger output to the screen when the script is run in a console.
+                                    // #SKOTDOC.LITERAL ALL Output all messages including errors, warnings, and normal informational messages. 
                                     case "ALL":
                                         mode = MODE.ALL;
                                         Out("Mode set to ALL");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Unknown mode \"" + args.GetArg(1, "?") + "\" in call to SETMODE");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART SETUPSOLVER
+                            // #SKOTDOC.BLOCKTYPE Setup
+                            // #SKOTDOC.BLOCKDESC Set up the solver which is responsible for determining what letter an individual picture represents.
                             case "SETUPSOLVER":
                                 string type = args.GetArg(1).ToUpper();
                                 string charset = args.GetQuotedArg(2);
@@ -166,22 +202,60 @@ namespace ScottClayton.Interpreter
                                     case "SNN":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
+                                            // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height));
                                                 Out("Simple Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
+                                            // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 4:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, chars));
                                                 Out("Simple Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
+                                            // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 5:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, hidden, chars));
                                                 Out("Simple Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
+                                            // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARG LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
                                             case 6:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, hidden, chars, learn));
                                                 Out("Simple Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSOLVER");
                                                 break;
@@ -191,22 +265,60 @@ namespace ScottClayton.Interpreter
                                     case "MNN":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height));
                                                 Out("Multi Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 4:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, chars));
                                                 Out("Multi Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 5:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, hidden, chars));
                                                 Out("Multi Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARG LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
                                             case 6:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, hidden, chars, learn));
                                                 Out("Multi Neural Network Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSOLVER");
                                                 break;
@@ -216,14 +328,31 @@ namespace ScottClayton.Interpreter
                                     case "BVS":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
+                                            // #SKOTDOC.LITERAL BVS Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new BitmapSubtractionSolver(charset, width, height));
                                                 Out("Bitmap Vector Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
+                                            // #SKOTDOC.LITERAL BVS Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG MergePatterns Boolean value 'Y' or 'N' - Whether or not to group all patterns with the same solution. If you do not, then a separate pattern will be created for every input (not recommended usually) and it will take a lot of time and resources.
                                             case 4:
                                                 captcha.SetSolverMethod(new BitmapSubtractionSolver(charset, width, height, merge));
                                                 Out("Bitmap Vector Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSOLVER");
                                                 break;
@@ -233,10 +362,18 @@ namespace ScottClayton.Interpreter
                                     case "HS":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use a histogram solver that compares the histograms of patterns to samples.
+                                            // #SKOTDOC.LITERAL HS Set up the solver to use a histogram solver that compares the histograms of patterns to samples.
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new HistogramSolver(charset, width, height));
                                                 Out("Histogram Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSOLVER");
                                                 break;
@@ -246,10 +383,18 @@ namespace ScottClayton.Interpreter
                                     case "CV":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Set up the solver to use contour vector analysis. Contour analysis has the advantage on being invariant to scale, rotation, and translation which makes it ideal for some (but not all) situations.
+                                            // #SKOTDOC.LITERAL CV Set up the solver to use contour vector analysis.
+                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new ContourAnalysisSolver(charset, width, height));
                                                 Out("Contour Analysis Solver Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSOLVER");
                                                 break;
@@ -261,11 +406,22 @@ namespace ScottClayton.Interpreter
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART DEFINEPRECONDITIONS
+                            // #SKOTDOC.BLOCKTYPE Setup
+                            // #SKOTDOC.BLOCKDESC Start the preconditioning loop block ("loop" because it's run for each image being processed).
+                            // #SKOTDOC.FUNCSTART
+                            // #SKOTDOC.FUNCDESC Start the preconditioning loop block.
                             case "DEFINEPRECONDITIONS":
                                 gatheringPreconditions = true;
                                 break;
+                            // #SKOTDOC.FUNCEND
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART SETUPSEGMENTER
+                            // #SKOTDOC.BLOCKTYPE Setup
+                            // #SKOTDOC.BLOCKDESC Set up the segmenter which is responsible for extracting individual letters from an image after preprocessing.
                             case "SETUPSEGMENTER":
                                 string xtype = args.GetArg(1).ToUpper();
                                 int segwidth = args.GetArg(2).ToInt();
@@ -277,14 +433,29 @@ namespace ScottClayton.Interpreter
                                     case "BLOB":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Use the blob segmenter, where each extracted image is represented as a separate, uniquely colored block of pixels in the source image.
+                                            // #SKOTDOC.LITERAL BLOB Use the blob segmenter to extract individual symbols.
+                                            // #SKOTDOC.FUNCARG MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARG MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
                                             case 2:
                                                 captcha.SetSegmentationMethod(new BlobSegmentMethod(segwidth, segheight));
                                                 Out("Segmenter Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Use the blob segmenter, where each extracted image is represented as a separate, uniquely colored block of pixels in the source image.
+                                            // #SKOTDOC.LITERAL BLOB Use the blob segmenter to extract individual symbols.
+                                            // #SKOTDOC.FUNCARG MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARG MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARG NumBlobs The fixed number of blobs to extract from the image. If fewer than this number are found, then the largest blobs will be split up until there are this many blobs. If there are too many, then the smallest will be ignored.
                                             case 3:
                                                 captcha.SetSegmentationMethod(new BlobSegmentMethod(segwidth, segheight, segblobs));
                                                 Out("Segmenter Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSEGMENTER");
                                                 break;
@@ -294,14 +465,27 @@ namespace ScottClayton.Interpreter
                                     case "HIST":
                                         switch (args.Count - 2)
                                         {
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Use histograms to determine where the best place in the image is to slice between letters.
+                                            // #SKOTDOC.LITERAL HIST Use histograms to divide up the image.
+                                            // #SKOTDOC.FUNCARG Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
                                             case 1:
                                                 captcha.SetSegmentationMethod(new HistogramSegmentMethod(tolerance: segwidth));
                                                 Out("Segmenter Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
+                                            // #SKOTDOC.FUNCSTART
+                                            // #SKOTDOC.FUNCDESC Use histograms to determine where the best place in the image is to slice between letters.
+                                            // #SKOTDOC.LITERAL HIST Use histograms to divide up the image.
+                                            // #SKOTDOC.FUNCARG Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
+                                            // #SKOTDOC.FUNCARG NumberOfChars The number of characters you expect to have extracted from the image. If there are more than this, then the least likely matches will be discarded. If there are fewer than this, then the largest ones will be subdivided.
                                             case 2:
                                                 captcha.SetSegmentationMethod(new HistogramSegmentMethod(tolerance: segwidth, numChars: segheight));
                                                 Out("Segmenter Setup Complete");
                                                 break;
+                                            // #SKOTDOC.FUNCEND
+
                                             default:
                                                 Error("Wrong number of arguments in call to SETUPSEGMENTER");
                                                 break;
@@ -313,61 +497,99 @@ namespace ScottClayton.Interpreter
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART TESTSEGMENT
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Test the preprocessing and segmentation setup on a test image and save the segmented parts to a folder.
                             case "TESTSEGMENT":
                                 string tsimage = args.GetQuotedArg(1);
                                 string tsfolder = args.GetQuotedArg(2);
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Test the preprocessing and segmentation setup on a test image and save the segmented parts to a folder.
+                                    // #SKOTDOC.FUNCARG ImageLocation The location of the image to test the segmentation on.
+                                    // #SKOTDOC.FUNCARG OutputFolder The folder to output the segmented test symbols to.
                                     case 2:
                                         captcha.TestSegmentation(tsimage, tsfolder);
                                         Out("Test segmentation of " + args.GetArg(1) + " complete");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to TESTSEGMENT");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART TRAIN
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Train the solver on the patterns acquired or loaded.
                             case "TRAIN":
                                 string tfolder = args.GetQuotedArg(1);
                                 int titerations = args.GetArg(2).ToInt();
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Start training on a folder of patterns that have already been segmented and labeled for training.
+                                    // #SKOTDOC.FUNCARG Folder The folder that contains the generated testing set of labeled patterns.
                                     case 1:
                                         PatternResult tresult1 = captcha.TrainOnSet(tfolder, 1);
                                         Out("Training Complete", true);
                                         Out("Error Approximation: " + tresult1.Error.ToString());
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Start training on a folder of patterns that have already been segmented and labeled for training.
+                                    // #SKOTDOC.FUNCARG Folder The folder that contains the generated testing set of labeled patterns.
+                                    // #SKOTDOC.FUNCARG Iterations Complete this many iterations of training on the given training set.
                                     case 2:
                                         PatternResult tresult2 = captcha.TrainOnSet(tfolder, titerations);
                                         Out("Training Complete", true);
                                         Out("Error Approximation: " + tresult2.Error.ToString());
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to TRAIN");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART TEST
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Test the solver's ability to produce correct predictions on the patterns acquired or loaded. (Use patterns that were not used in training or you will get skewed results.)
                             case "TEST":
                                 string testfolder = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Test the solver's ability to produce correct predictions on the patterns acquired or loaded.
+                                    // #SKOTDOC.FUNCARG Folder The folder that contains the set of labeled patterns to test on. (Use patterns that were not used in training or you will get skewed results.)
                                     case 1:
                                         PatternResult tresult3 = captcha.TestOnSet(testfolder);
                                         Out("Testing Complete. Percent Correct: " + tresult3.PercentageCorrect.ToString("0.00") + "%", true);
                                         Append("x-test.txt", tresult3.PercentageCorrect.ToString("0.00") + "%");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to TEST");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART FULLTEST
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
                             case "FULLTEST":
                                 string fullfolder = args.GetQuotedArg(1);
                                 string fullreport = args.GetQuotedArg(2);
@@ -375,26 +597,53 @@ namespace ScottClayton.Interpreter
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
+                                    // #SKOTDOC.FUNCARG Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
+                                    // #SKOTDOC.FUNCARG ReportFile The file to save the report to.
                                     case 2:
                                         PatternResult tresult4 = captcha.FullTestOnFolder(fullfolder, fullreport);
                                         Out("FULL Testing Complete. Percent Correct: " + tresult4.PercentageCorrect.ToString("0.00") + "%", true);
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
+                                    // #SKOTDOC.FUNCARG Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
+                                    // #SKOTDOC.FUNCARG ReportFile The file to save the report to.
+                                    // #SKOTDOC.FUNCARG ImageFilter The filter (e.g., *.bmp) to use to find images.
                                     case 3:
                                         PatternResult tresult5 = captcha.FullTestOnFolder(fullfolder, fullreport, fullext);
                                         Out("FULL Testing Complete. Percent Correct: " + tresult5.PercentageCorrect.ToString("0.00") + "%", true);
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to FULLTEST");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART SOLVE
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Solve a given image using the logic developed and trained for in the CBL script and output the solution.
                             case "SOLVE":
                                 string imagelocation = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
                                 {
                                     case 1:
+                                        // #SKOTDOC.FUNCSTART
+                                        // #SKOTDOC.FUNCDESC Solve a CAPTCHA using the logic developed in the current CBL script.
+                                        // #SKOTDOC.FUNCARG ImageLocation The image file to load and solve.
+                                        // #SKOTDOC.FUNCEND
+
+                                        // #SKOTDOC.FUNCSTART
+                                        // #SKOTDOC.FUNCDESC Solve a CAPTCHA using the logic developed in the current CBL script.
+                                        // #SKOTDOC.LITERAL %IMAGE% This placeholder will be replaced with the first command line value when run from the command line or, if being run from the CBL-GUI script runner app, will be replaced with the image that was dragged and dropped or loaded by the GUI.
+                                        // #SKOTDOC.FUNCEND
+
                                         if (args.GetArg(1).ToUpper() == "%IMAGE%")
                                         {
                                             if (ImageToBreak != null)
@@ -418,52 +667,92 @@ namespace ScottClayton.Interpreter
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART SAVE
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Save the DataBase of trained patterns to a file so that it can be loaded later. The idea is to distribute the database file with your finished script (the finished script shouldn't do any training, only efficient solving).
                             case "SAVE":
                                 string saveLoc = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Save the DataBase of trained patterns to the default "captcha.db" file.
                                     case 0:
                                         captcha.SaveToFile("captcha.db");
                                         Out("CAPTCHA Breaking Solution Saved");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Save the DataBase of trained patterns to a given file.
+                                    // #SKOTDOC.FUNCARG Location The file name to save the pattern database to.
                                     case 1:
                                         captcha.SaveToFile(saveLoc);
                                         Out("CAPTCHA Breaking Solution Saved");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to SAVE");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART LOAD
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Load a pattern database. The database you load needs to have been saved under the same setup conditions as the script is being loaded under.
                             case "LOAD":
                                 string dbLoc = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
                                 {
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Load a pattern database from the default "captcha.db" file.
                                     case 0:
                                         //List<string> recreate = captcha.LoadMetadataFromFile(dbLoc).Split(new string[] { SPLITTER }, StringSplitOptions.RemoveEmptyEntries).ToList();
                                         captcha.LoadFromFile("captcha.db");
                                         Out("CAPTCHA Breaking Solution Loaded");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Load a pattern database from a specified file.
+                                    // #SKOTDOC.FUNCARG Location The name of the pattern database file to load.
                                     case 1:
                                         captcha.LoadFromFile(dbLoc);
                                         Out("CAPTCHA Breaking Solution Loaded");
                                         break;
+                                    // #SKOTDOC.FUNCEND
+
                                     default:
                                         Error("Wrong number of arguments in call to LOAD");
                                         break;
                                 }
                                 break;
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART SAY
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Print out a line of debug text to the console.
                             case "SAY":
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Print out a line of debug text to the console.
+                                // #SKOTDOC.FUNCARG Text The text to print.
                                 string say = args.GetQuotedArg(1);
                                 Out(say, true);
                                 break;
+                                // #SKOTDOC.FUNCEND
+                            // #SKOTDOC.BLOCKEND
 
+                            // #SKOTDOC.BLOCKSTART WAIT
+                            // #SKOTDOC.BLOCKTYPE Working
+                            // #SKOTDOC.BLOCKDESC Wait for the user to press a key.
                             case "WAIT":
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Wait for the user to press a key.
                                 Console.WriteLine("Press a key to continue.");
                                 try
                                 {
@@ -474,6 +763,8 @@ namespace ScottClayton.Interpreter
                                     Console.Read();
                                 }
                                 break;
+                                // #SKOTDOC.FUNCEND
+                            // #SKOTDOC.BLOCKEND
 
                             default:
                                 Error("Unknown command \"" + args.GetArg(0) + "\"");
@@ -555,7 +846,7 @@ namespace ScottClayton.Interpreter
                     switch (args.GetArg(0))
                     {
                         // #SKOTDOC.BLOCKSTART RESIZE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Resize the image to a specified width and height.
                         case "RESIZE":
                             int rswidth = args.GetArg(1).ToInt();
@@ -581,7 +872,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART ERODE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Erodes the edges of blobs within an image.
                         case "ERODE":
                             int etimes = args.GetArg(1).ToInt();
@@ -616,7 +907,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART GROW
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Grow the size of all blobs in the image by one pixel.
                         case "GROW":
                             int gtimes = args.GetArg(1).ToInt();
@@ -651,7 +942,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART OUTLINE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Performs a convolutional filter on the image that outlines edges.
                         case "OUTLINE":
                             switch (args.Count - 1)
@@ -672,7 +963,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART SUBTRACT
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Perform a pixel-by-pixel subtraction of a given image from the working image and set each pixel value as the difference between the two.
                         case "SUBTRACT":
                             string img = args.GetQuotedArg(1);
@@ -710,7 +1001,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART MEDIAN
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Perform a convolutional median filter on the image.
                         case "MEDIAN":
                             int mtimes = args.GetArg(1).ToInt();
@@ -745,7 +1036,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART INVERT
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Invert the colors in the image.
                         case "INVERT":
                             switch (args.Count - 1)
@@ -766,7 +1057,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART CROP
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Crop the image.
                         case "CROP":
                             int cx = args.GetArg(1).ToInt();
@@ -796,7 +1087,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART BILATERALSMOOTH
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Performs a bilateral smoothing (edge preserving smoothing) and noise reduction filter on an image.
                         case "BILATERALSMOOTH":
                             switch (args.Count - 1)
@@ -817,7 +1108,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART COLORFILLBLOBS
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Fill each unique blob in an image with a random color.
                         // #SKOTDOC.BLOCKDESC A group of adjacent pixels is considered a single blob when they are all similar to each other in the L`*`a`*`b`*` color space below a given threshold.
                         // #SKOTDOC.BLOCKDESC In the L`*`a`*`b`*` color space, a threshold of 2.3 is considered to be a change "just noticible to the human eye."
@@ -853,7 +1144,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART REMOVESMALLBLOBS
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Remove blobs (by filling them with the background color) from an image that are too small.
                         case "REMOVESMALLBLOBS":
                             int rsbcount = args.GetArg(1).ToInt();
@@ -894,7 +1185,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART BLACKANDWHITE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Convert the image to black and white, where anything not white turns black (even the color #FEFEFE).
                         // #SKOTDOC.BLOCKDESC If you need to choose the threshold yourself, then see BINARIZE.
                         case "BLACKANDWHITE":
@@ -916,7 +1207,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART BINARIZE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Convert the image to black and white, where anything above a certain threshold is turned white.
                         case "BINARIZE":
                             int thresh = args.GetArg(1).ToInt();
@@ -940,7 +1231,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART REMOVENONCOLOR
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC White out all pixels that are not a color (any shade of grey). (Useful when a CAPTCHA only colors the letters and not the background.)
                         case "REMOVENONCOLOR":
                             int dist = args.GetArg(1).ToInt();
@@ -972,7 +1263,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART KEEPONLYMAINCOLOR
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Finds the color that occurrs most often in the image and removes all other colors that are not the most common color. 
                         // #SKOTDOC.BLOCKDESC This is great if the main CAPTCHA text is all one color and that text always represents the most common color in the image (in which case this function single-handedly segments the letters from the background).
                         case "KEEPONLYMAINCOLOR":
@@ -997,7 +1288,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART SAVESAMPLE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Save a sample of the working image for debugging purposes. This is helpful when writing a script, as you can see every step along the way if you wish.
                         case "SAVESAMPLE":
                             string filename = args.GetQuotedArg(1);
@@ -1021,7 +1312,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART MEANSHIFT
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Apply a mean shift filter to the image. This will effectively flatten out color groups within a certain tolerance.
                         case "MEANSHIFT":
                             int msiterations = args.GetArg(1).ToInt();
@@ -1057,7 +1348,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART FILLWHITE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Fill a color into a region of an image.
                         case "FILLWHITE":
                             int fwx = args.GetArg(1).ToInt();
@@ -1083,7 +1374,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART CONVOLUTE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Perform a convolutional filter on the image.
                         case "CONVOLUTE":
                             int c_a = args.GetArg(1).ToInt();
@@ -1123,7 +1414,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART HISTOGRAMROTATE
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Rotate an image using trial and error until a best angle is found (measured by a vertical histogram). 
                         // #SKOTDOC.BLOCKDESC Use this when an image has slanted letters and you want them to be right side up.
                         case "HISTOGRAMROTATE":
@@ -1140,7 +1431,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Rotate an image using trial and error until a best angle is found (measured by a vertical histogram). 
                                 case 1:
-                                    // #SKOTDOC.FUNCARG TRUE Pass any value here and the function will overlay the resulting image with a completely useless (albeit cool to look at) histogram graph.
+                                    // #SKOTDOC.LITERAL TRUE Overlay the resulting image with a completely useless (albeit cool to look at) histogram graph.
                                     s.ResizeRotateCut(true);
                                     Out("Image rotated until best histogram was found (HISTOGRAM DEBUG OVERLAY APPLIED)");
                                     break;
@@ -1154,7 +1445,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKEND
 
                         // #SKOTDOC.BLOCKSTART WAIT
-                        // #SKOTDOC.BLOCKTYPE Image
+                        // #SKOTDOC.BLOCKTYPE Preprocess
                         // #SKOTDOC.BLOCKDESC Wait for a key press from the user to continue.
                         case "WAIT":
                             // #SKOTDOC.FUNCSTART
