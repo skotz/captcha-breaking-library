@@ -80,6 +80,8 @@
     <ProjectReference Include="..\ScottClayton.CAPTCHA\ScottClayton.CAPTCHA.csproj">
       <Project>{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}</Project>
       <Name>ScottClayton.CAPTCHA</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

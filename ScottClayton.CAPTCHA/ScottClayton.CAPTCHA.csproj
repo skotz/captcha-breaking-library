@@ -30,25 +30,32 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Imaging, Version=2.2.4.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
       <HintPath>..\AForge.NET\Release\AForge.Imaging.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ContourAnalysis, Version=1.0.0.15900, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Emgu.CV\ContourAnalysis.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ContourAnalysisProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Emgu.CV\ContourAnalysisProcessing.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Emgu.CV, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\Emgu.CV\Emgu.CV.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Emgu.CV.UI, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\Emgu.CV\Emgu.CV.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Emgu.Util, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\Emgu.CV\Emgu.Util.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,6 +75,11 @@
     <Compile Include="Image\BitmapVectorCollection.cs" />
     <Compile Include="Image\Color\IColor.cs" />
     <Compile Include="Image\Color\LAB.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Segmentation\BlobSegmentMethod.cs" />
     <Compile Include="Image\Exceptions.cs" />
     <Compile Include="Segmentation\HistogramSegmentMethod.cs" />
@@ -97,15 +109,15 @@
     <Compile Include="Utility\Message.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="opencv_core220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="opencv_highgui220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="opencv_imgproc220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="opencv_imgproc220.dll" />
+    <None Include="opencv_highgui220.dll" />
+    <None Include="opencv_core220.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

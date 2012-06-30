@@ -19,7 +19,7 @@ namespace CAPTCHA_Breaker_Compiled
 
         public string Script { get; set; }
 
-        public Form1()
+        public Form1(string[] args)
         {
             InitializeComponent();
 
@@ -29,6 +29,28 @@ namespace CAPTCHA_Breaker_Compiled
 
             CaptchaInterpreter.AllowGlobalDegugMessages();
             CaptchaInterpreter.OnGlobalBitmapMessage += new CaptchaInterpreter.BitmapMessageHandler(CaptchaInterpreter_OnGlobalBitmapMessage);
+
+            if (args.Length > 0)
+            {
+                try
+                {
+                    Script = File.ReadAllText(args[0]);
+                    Directory.SetCurrentDirectory(new FileInfo(args[0]).DirectoryName);
+
+                    if (args[0].Contains("\\"))
+                    {
+                        textBox1.Text = args[0].Substring(args[0].LastIndexOf("\\") + 1);
+                    }
+                    else
+                    {
+                        textBox1.Text = "Script Loaded";
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Could not load script!", "CBL GUI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         void CaptchaInterpreter_OnGlobalBitmapMessage(Bitmap image)
@@ -111,7 +133,7 @@ namespace CAPTCHA_Breaker_Compiled
             }
             catch
             {
-                textBox1.Text = "Invalid Image";
+                textBox1.Text = "Invalid Script";
             }
         }
 
