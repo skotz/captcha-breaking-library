@@ -17,7 +17,7 @@ DefaultDirName={pf}\CAPTCHA Breaking Scripting Language
 DefaultGroupName=CAPTCHA Breaking Scripting Language
 OutputDir=.
 OutputBaseFilename=setup-CBL-GUI
-SetupIconFile=.\ART\icon04b.ico
+SetupIconFile=.\ART\icon01.ico
 Compression=lzma
 SolidCompression=yes        
 LicenseFile=.\LICENSE.txt
@@ -44,7 +44,7 @@ Source: ".\CAPTCHA Breaker Compiled\bin\Release\opencv_highgui220.dll"; DestDir:
 Source: ".\CAPTCHA Breaker Compiled\bin\Release\opencv_imgproc220.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\CAPTCHA Breaker Compiled\bin\Release\ScottClayton.CAPTCHA.dll"; DestDir: "{app}"; Flags: ignoreversion   
 Source: ".\CAPTCHA Breaker Compiled\bin\Release\ScottClayton.Interpreter.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\art\icon04b.ico"; DestDir: "{app}\script.ico"; Flags: ignoreversion
+Source: ".\ART\icon04d2.ico"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -59,6 +59,6 @@ Filename: "{app}\CBL-GUI.exe"; Description: "{cm:LaunchProgram,CAPTCHA Breaking 
 [Registry]
 Root: HKCR; Subkey: ".captcha"; ValueType: string; ValueName: ""; ValueData: "CBLScript"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "CBLScript"; ValueType: string; ValueName: ""; ValueData: "CBL Script"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "CBLScript\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\script.ico,0"
+Root: HKCR; Subkey: "CBLScript\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: """{app}\icon04d2.ico"""
 Root: HKCR; Subkey: "CBLScript\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\CBL-GUI.exe"" ""%1"""
 
