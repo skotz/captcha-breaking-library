@@ -138,6 +138,7 @@ namespace CAPTCHA_Breaker_IDE
             {
                 richTextBox1.Text = File.ReadAllText(openFileDialog2.FileName);
                 loadedFile = openFileDialog2.FileName;
+                Directory.SetCurrentDirectory(new FileInfo(loadedFile).DirectoryName);
             }
             catch (Exception ex)
             {
@@ -153,6 +154,7 @@ namespace CAPTCHA_Breaker_IDE
                 try
                 {
                     File.WriteAllLines(loadedFile, richTextBox1.Lines);
+                    Directory.SetCurrentDirectory(new FileInfo(loadedFile).DirectoryName);
                     Out("Script saved!");
                 }
                 catch (Exception ex)
@@ -173,6 +175,7 @@ namespace CAPTCHA_Breaker_IDE
             {
                 File.WriteAllLines(saveFileDialog1.FileName, richTextBox1.Lines);
                 loadedFile = saveFileDialog1.FileName;
+                Directory.SetCurrentDirectory(new FileInfo(loadedFile).DirectoryName);
                 Out("Script saved!");
             }
             catch (Exception ex)
