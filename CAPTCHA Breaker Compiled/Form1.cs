@@ -83,10 +83,14 @@ namespace CAPTCHA_Breaker_Compiled
         {
             textBox1.Text = (string)e.Result;
 
-            if (copySolutionToClipboardToolStripMenuItem.Checked)
+            try
             {
-                Clipboard.SetText((string)e.Result);
+                if (copySolutionToClipboardToolStripMenuItem.Checked)
+                {
+                    Clipboard.SetText((string)e.Result);
+                }
             }
+            catch { }
         }
 
         private void panel1_DragEnter(object sender, DragEventArgs e)

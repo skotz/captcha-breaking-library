@@ -819,6 +819,27 @@ namespace ScottClayton.CAPTCHA
         }
 
         /// <summary>
+        /// Load this captcha breaker from a base64 encoded string.
+        /// </summary>
+        public void LoadFromBase64(string base64)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64)))
+                using (GZipStream gz = new GZipStream(ms, CompressionMode.Decompress))
+                using (BinaryReader r = new BinaryReader(gz))
+                {
+                    string metadata = r.ReadString();
+                    solver.Load(r);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BreakerDataBaseException("Could not load the DB file for the CAPTCHA breaker from a base64 encoded string. Did you change something in the setup portion of the breaker script since the last load?", ex);
+            }
+        }
+
+        /// <summary>
         /// Load this captcha breaker from a DB file.
         /// </summary>
         /// <param name="filename">The file containing the saved contents of this breaker.</param>

@@ -706,6 +706,7 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKDESC Load a pattern database. The database you load needs to have been saved under the same setup conditions as the script is being loaded under.
                             case "LOAD":
                                 string dbLoc = args.GetQuotedArg(1);
+                                string base64 = args.GetQuotedArg(2);
 
                                 switch (args.Count - 1)
                                 {
@@ -723,6 +724,16 @@ namespace ScottClayton.Interpreter
                                     // #SKOTDOC.FUNCARGSTR Location The name of the pattern database file to load.
                                     case 1:
                                         captcha.LoadFromFile(dbLoc);
+                                        Out("CAPTCHA Breaking Solution Loaded");
+                                        break;
+                                    // #SKOTDOC.FUNCEND
+
+                                    // #SKOTDOC.FUNCSTART
+                                    // #SKOTDOC.FUNCDESC Load a pattern database from a base64 representation of the database file.
+                                    // #SKOTDOC.LITERAL Base64 Load the database file from a base64 encoded string.
+                                    // #SKOTDOC.FUNCARGSTR String The Base64 encoded database to load.
+                                    case 2:
+                                        captcha.LoadFromBase64(base64);
                                         Out("CAPTCHA Breaking Solution Loaded");
                                         break;
                                     // #SKOTDOC.FUNCEND
@@ -967,6 +978,7 @@ namespace ScottClayton.Interpreter
                         // #SKOTDOC.BLOCKDESC Perform a pixel-by-pixel subtraction of a given image from the working image and set each pixel value as the difference between the two.
                         case "SUBTRACT":
                             string img = args.GetQuotedArg(1);
+                            string imBase64 = args.GetQuotedArg(2);
 
                             switch (args.Count - 1)
                             {
@@ -989,6 +1001,30 @@ namespace ScottClayton.Interpreter
                                         }
                                     }
                                     s.Subtract(imageToSub);
+                                    Out("Image Subtracted");
+                                    break;
+                                // #SKOTDOC.FUNCEND
+
+                                // #SKOTDOC.FUNCSTART
+                                // #SKOTDOC.FUNCDESC Subtract one image from another.
+                                case 2:
+                                    // #SKOTDOC.LITERAL Base64 Denotes that the image data is encoded and listed here in base64.
+                                    // #SKOTDOC.FUNCARGSTR String The Base64 string that contains the bitmap image data.
+                                    Bitmap imageToSub2 = null;
+                                    lock (subtractionImages)
+                                    {
+                                        if (subtractionImages.ContainsKey(imBase64.GetHashCode().ToString()))
+                                        {
+                                            imageToSub2 = subtractionImages[imBase64.GetHashCode().ToString()].CloneFull();
+                                        }
+                                        else
+                                        {
+                                            // Save it so that we don't have to keep loading it
+                                            imageToSub2 = (Bitmap)Bitmap.FromStream(new MemoryStream(Convert.FromBase64String(imBase64)));
+                                            subtractionImages.Add(imBase64.GetHashCode().ToString(), imageToSub2.CloneFull());
+                                        }
+                                    }
+                                    s.Subtract(imageToSub2);
                                     Out("Image Subtracted");
                                     break;
                                 // #SKOTDOC.FUNCEND
