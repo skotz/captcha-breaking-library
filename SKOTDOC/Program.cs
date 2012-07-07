@@ -112,13 +112,37 @@ namespace SKOTDOC
                                     case "LITERAL":
                                         if (inFunction)
                                         {
-                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, true));
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, ArgType.LITERAL));
                                         }
                                         break;
                                     case "FUNCARG":
                                         if (inFunction)
                                         {
                                             current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data));
+                                        }
+                                        break;
+                                    case "FUNCARGSTR":
+                                        if (inFunction)
+                                        {
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, ArgType.STRING));
+                                        }
+                                        break;
+                                    case "FUNCARGINT":
+                                        if (inFunction)
+                                        {
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, ArgType.INT));
+                                        }
+                                        break;
+                                    case "FUNCARGDBL":
+                                        if (inFunction)
+                                        {
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, ArgType.DOUBLE));
+                                        }
+                                        break;
+                                    case "FUNCARGBOOL":
+                                        if (inFunction)
+                                        {
+                                            current.Overloads[current.Overloads.Count - 1].Arguments.Add(new Argument(data, ArgType.BOOL));
                                         }
                                         break;
                                     case "FUNCEND":
@@ -141,6 +165,16 @@ namespace SKOTDOC
 
                 using (StreamWriter w = new StreamWriter(args[1], false))
                 {
+                    string WikiPage = args[1];
+                    if (WikiPage.Contains("\\"))
+                    {
+                        WikiPage = WikiPage.Substring(args[1].LastIndexOf('\\')).Substring(0, args[1].LastIndexOf('.'));
+                    }
+                    else
+                    {
+                        WikiPage = WikiPage.Substring(0, args[1].LastIndexOf('.'));
+                    }
+
                     // Google Code wiki labels
                     w.WriteLine("#labels Featured,Phase-Implementation");
 
@@ -151,7 +185,19 @@ namespace SKOTDOC
                         w.WriteLine();
                     }
 
-                    w.WriteLine("<wiki:toc max_depth=\"2\" />");
+                    //w.WriteLine("<wiki:toc max_depth=\"2\" />");
+
+                    foreach (Section s in sections)
+                    {
+                        w.WriteLine();
+                        w.WriteLine("<table><tr><td colspan=\"2\"><font size=\"4\">*" + s.Name + "_*</font></td><td>*" + s.Description + "*_</td></tr>");
+                        foreach (Function f in s.Functions)
+                        {
+                            w.WriteLine("<tr><td width=\"25\"> </td><td width=\"200px\">[" + WikiPage + "#" + f.Name + " " + f.Name + "]</td><td>" + f.Description + "</td></tr>");
+                        }
+                        w.WriteLine("</table>");
+                        w.WriteLine();
+                    }
 
                     foreach (Section s in sections)
                     {
@@ -177,14 +223,7 @@ namespace SKOTDOC
                                 {
                                     foreach (Argument a in o.Arguments)
                                     {
-                                        if (a.Literal)
-                                        {
-                                            w.Write(String.Format(", {0}", a.Name));
-                                        }
-                                        else
-                                        {
-                                            w.Write(String.Format(", {0}", a.Name));
-                                        }
+                                        w.Write(String.Format(", {0}", a.Name));
                                     }
                                 }
                                 w.WriteLine("</code>*");
@@ -212,13 +251,29 @@ namespace SKOTDOC
                                     w.WriteLine("<tr><td><pre>   </pre></td><td>");
                                     foreach (Argument a in o.Arguments)
                                     {
-                                        if (a.Literal)
+                                        if (a.Type == ArgType.LITERAL)
                                         {
-                                            w.WriteLine(String.Format("|| _{0}_ || *Literal Value* - {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("|| _{0}_ || _Literal Value_ || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
+                                        else if (a.Type == ArgType.DOUBLE)
+                                        {
+                                            w.WriteLine(String.Format("|| {0} || Decimal Value || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
+                                        else if (a.Type == ArgType.INT)
+                                        {
+                                            w.WriteLine(String.Format("|| {0} || Whole Number || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
+                                        else if (a.Type == ArgType.STRING)
+                                        {
+                                            w.WriteLine(String.Format("|| {0} || Quoted String || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                        }
+                                        else if (a.Type == ArgType.BOOL)
+                                        {
+                                            w.WriteLine(String.Format("|| {0} || Boolean (Y/N) || {1} ||", "{{{" + a.Name + "}}}", a.Description));
                                         }
                                         else
                                         {
-                                            w.WriteLine(String.Format("|| {0} || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("|| {0} || Parameter ||  {1} ||", "{{{" + a.Name + "}}}", a.Description));
                                         }
                                     }
                                     w.WriteLine("</td></tr></table>");
@@ -286,13 +341,23 @@ namespace SKOTDOC
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool Literal { get; set; }
+        public ArgType Type { get; set; }
 
-        public Argument(string data, bool literal = false)
+        public Argument(string data, ArgType type = ArgType.NONE)
         {
             Name = data.Split(' ')[0];
             Description = data.Substring(data.IndexOf(" ") + 1);
-            Literal = literal;
+            Type = type;
         }
+    }
+
+    public enum ArgType
+    {
+        BOOL,
+        DOUBLE,
+        INT,
+        STRING,
+        LITERAL,
+        NONE
     }
 }

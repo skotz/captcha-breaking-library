@@ -205,9 +205,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
                                             // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height));
                                                 Out("Simple Neural Network Solver Setup Complete");
@@ -217,10 +217,10 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
                                             // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 4:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, chars));
                                                 Out("Simple Neural Network Solver Setup Complete");
@@ -230,11 +230,11 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
                                             // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 5:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, hidden, chars));
                                                 Out("Simple Neural Network Solver Setup Complete");
@@ -244,12 +244,12 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a fully connected, backpropagation neural network.
                                             // #SKOTDOC.LITERAL SNN Set up the solver to use a Simple Neural Network (fully connected with backpropagation error correction).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
-                                            // #SKOTDOC.FUNCARG LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGDBL LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
                                             case 6:
                                                 captcha.SetSolverMethod(new SimpleNeuralNetSolver(charset, width, height, hidden, chars, learn));
                                                 Out("Simple Neural Network Solver Setup Complete");
@@ -268,9 +268,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
                                             // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height));
                                                 Out("Multi Neural Network Solver Setup Complete");
@@ -280,10 +280,10 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
                                             // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 4:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, chars));
                                                 Out("Multi Neural Network Solver Setup Complete");
@@ -293,11 +293,11 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
                                             // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
                                             case 5:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, hidden, chars));
                                                 Out("Multi Neural Network Solver Setup Complete");
@@ -307,12 +307,12 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
                                             // #SKOTDOC.LITERAL MNN Set up the solver to use a set of neural networks (one per pattern instead of one for all patterns).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
-                                            // #SKOTDOC.FUNCARG Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
-                                            // #SKOTDOC.FUNCARG LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT HiddenNeurons The number of neurons to put in the middle (hidden) layer of the neural network.
+                                            // #SKOTDOC.FUNCARGINT Characters The fixed number of characters that are in every CAPTCHA for this system. If the number of characters varies, then use a different overload of this function.
+                                            // #SKOTDOC.FUNCARGDBL LearnRate The learning rate of descent for training the neural network. The value should be between 0.0 and 1.0, however anything below 0.9 will descend way too quickly.
                                             case 6:
                                                 captcha.SetSolverMethod(new MultiNeuralNetSolver(charset, width, height, hidden, chars, learn));
                                                 Out("Multi Neural Network Solver Setup Complete");
@@ -331,9 +331,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
                                             // #SKOTDOC.LITERAL BVS Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new BitmapSubtractionSolver(charset, width, height));
                                                 Out("Bitmap Vector Solver Setup Complete");
@@ -343,10 +343,10 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
                                             // #SKOTDOC.LITERAL BVS Set up the solver to use bitmap vector subtraction (which matches patterns by finding the root-mean-square distance between two images).
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG MergePatterns Boolean value 'Y' or 'N' - Whether or not to group all patterns with the same solution. If you do not, then a separate pattern will be created for every input (not recommended usually) and it will take a lot of time and resources.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGBOOL MergePatterns Whether or not to group all patterns with the same solution. If you do not, then a separate pattern will be created for every input (not recommended usually) and it will take a lot of time and resources.
                                             case 4:
                                                 captcha.SetSolverMethod(new BitmapSubtractionSolver(charset, width, height, merge));
                                                 Out("Bitmap Vector Solver Setup Complete");
@@ -365,9 +365,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use a histogram solver that compares the histograms of patterns to samples.
                                             // #SKOTDOC.LITERAL HS Set up the solver to use a histogram solver that compares the histograms of patterns to samples.
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new HistogramSolver(charset, width, height));
                                                 Out("Histogram Solver Setup Complete");
@@ -386,9 +386,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Set up the solver to use contour vector analysis. Contour analysis has the advantage on being invariant to scale, rotation, and translation which makes it ideal for some (but not all) situations.
                                             // #SKOTDOC.LITERAL CV Set up the solver to use contour vector analysis.
-                                            // #SKOTDOC.FUNCARG CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
-                                            // #SKOTDOC.FUNCARG Width The width that will be used for each input image.
-                                            // #SKOTDOC.FUNCARG Height The height that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGSTR CharacterSet A string containing all possible characters that could be used in the CAPTCHA system.
+                                            // #SKOTDOC.FUNCARGINT Width The width that will be used for each input image.
+                                            // #SKOTDOC.FUNCARGINT Height The height that will be used for each input image.
                                             case 3:
                                                 captcha.SetSolverMethod(new ContourAnalysisSolver(charset, width, height));
                                                 Out("Contour Analysis Solver Setup Complete");
@@ -436,8 +436,8 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Use the blob segmenter, where each extracted image is represented as a separate, uniquely colored block of pixels in the source image.
                                             // #SKOTDOC.LITERAL BLOB Use the blob segmenter to extract individual symbols.
-                                            // #SKOTDOC.FUNCARG MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
-                                            // #SKOTDOC.FUNCARG MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARGINT MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARGINT MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
                                             case 2:
                                                 captcha.SetSegmentationMethod(new BlobSegmentMethod(segwidth, segheight));
                                                 Out("Segmenter Setup Complete");
@@ -447,9 +447,9 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Use the blob segmenter, where each extracted image is represented as a separate, uniquely colored block of pixels in the source image.
                                             // #SKOTDOC.LITERAL BLOB Use the blob segmenter to extract individual symbols.
-                                            // #SKOTDOC.FUNCARG MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
-                                            // #SKOTDOC.FUNCARG MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
-                                            // #SKOTDOC.FUNCARG NumBlobs The fixed number of blobs to extract from the image. If fewer than this number are found, then the largest blobs will be split up until there are this many blobs. If there are too many, then the smallest will be ignored.
+                                            // #SKOTDOC.FUNCARGINT MinWidth The minimum width a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARGINT MinHeight The minimum height a blob must be to be considered a blob worthy of extraction.
+                                            // #SKOTDOC.FUNCARGINT NumBlobs The fixed number of blobs to extract from the image. If fewer than this number are found, then the largest blobs will be split up until there are this many blobs. If there are too many, then the smallest will be ignored.
                                             case 3:
                                                 captcha.SetSegmentationMethod(new BlobSegmentMethod(segwidth, segheight, segblobs));
                                                 Out("Segmenter Setup Complete");
@@ -468,7 +468,7 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Use histograms to determine where the best place in the image is to slice between letters.
                                             // #SKOTDOC.LITERAL HIST Use histograms to divide up the image.
-                                            // #SKOTDOC.FUNCARG Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
+                                            // #SKOTDOC.FUNCARGINT Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
                                             case 1:
                                                 captcha.SetSegmentationMethod(new HistogramSegmentMethod(tolerance: segwidth));
                                                 Out("Segmenter Setup Complete");
@@ -478,8 +478,8 @@ namespace ScottClayton.Interpreter
                                             // #SKOTDOC.FUNCSTART
                                             // #SKOTDOC.FUNCDESC Use histograms to determine where the best place in the image is to slice between letters.
                                             // #SKOTDOC.LITERAL HIST Use histograms to divide up the image.
-                                            // #SKOTDOC.FUNCARG Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
-                                            // #SKOTDOC.FUNCARG NumberOfChars The number of characters you expect to have extracted from the image. If there are more than this, then the least likely matches will be discarded. If there are fewer than this, then the largest ones will be subdivided.
+                                            // #SKOTDOC.FUNCARGINT Tolerance Any number of non-background pixels below this number (on any given vertical slice of the image) will be considered a valid split point.
+                                            // #SKOTDOC.FUNCARGINT NumberOfChars The number of characters you expect to have extracted from the image. If there are more than this, then the least likely matches will be discarded. If there are fewer than this, then the largest ones will be subdivided.
                                             case 2:
                                                 captcha.SetSegmentationMethod(new HistogramSegmentMethod(tolerance: segwidth, numChars: segheight));
                                                 Out("Segmenter Setup Complete");
@@ -510,8 +510,8 @@ namespace ScottClayton.Interpreter
                                 {
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Test the preprocessing and segmentation setup on a test image and save the segmented parts to a folder.
-                                    // #SKOTDOC.FUNCARG ImageLocation The location of the image to test the segmentation on.
-                                    // #SKOTDOC.FUNCARG OutputFolder The folder to output the segmented test symbols to.
+                                    // #SKOTDOC.FUNCARGSTR ImageLocation The location of the image to test the segmentation on.
+                                    // #SKOTDOC.FUNCARGSTR OutputFolder The folder to output the segmented test symbols to.
                                     case 2:
                                         captcha.TestSegmentation(tsimage, tsfolder);
                                         Out("Test segmentation of " + args.GetArg(1) + " complete");
@@ -536,7 +536,7 @@ namespace ScottClayton.Interpreter
                                 {
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Start training on a folder of patterns that have already been segmented and labeled for training.
-                                    // #SKOTDOC.FUNCARG Folder The folder that contains the generated testing set of labeled patterns.
+                                    // #SKOTDOC.FUNCARGSTR Folder The folder that contains the generated testing set of labeled patterns.
                                     case 1:
                                         PatternResult tresult1 = captcha.TrainOnSet(tfolder, 1);
                                         Out("Training Complete", true);
@@ -546,8 +546,8 @@ namespace ScottClayton.Interpreter
 
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Start training on a folder of patterns that have already been segmented and labeled for training.
-                                    // #SKOTDOC.FUNCARG Folder The folder that contains the generated testing set of labeled patterns.
-                                    // #SKOTDOC.FUNCARG Iterations Complete this many iterations of training on the given training set.
+                                    // #SKOTDOC.FUNCARGSTR Folder The folder that contains the generated testing set of labeled patterns.
+                                    // #SKOTDOC.FUNCARGINT Iterations Complete this many iterations of training on the given training set.
                                     case 2:
                                         PatternResult tresult2 = captcha.TrainOnSet(tfolder, titerations);
                                         Out("Training Complete", true);
@@ -572,7 +572,7 @@ namespace ScottClayton.Interpreter
                                 {
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Test the solver's ability to produce correct predictions on the patterns acquired or loaded.
-                                    // #SKOTDOC.FUNCARG Folder The folder that contains the set of labeled patterns to test on. (Use patterns that were not used in training or you will get skewed results.)
+                                    // #SKOTDOC.FUNCARGSTR Folder The folder that contains the set of labeled patterns to test on. (Use patterns that were not used in training or you will get skewed results.)
                                     case 1:
                                         PatternResult tresult3 = captcha.TestOnSet(testfolder);
                                         Out("Testing Complete. Percent Correct: " + tresult3.PercentageCorrect.ToString("0.00") + "%", true);
@@ -599,8 +599,8 @@ namespace ScottClayton.Interpreter
                                 {
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
-                                    // #SKOTDOC.FUNCARG Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
-                                    // #SKOTDOC.FUNCARG ReportFile The file to save the report to.
+                                    // #SKOTDOC.FUNCARGSTR Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
+                                    // #SKOTDOC.FUNCARGSTR ReportFile The file to save the report to.
                                     case 2:
                                         PatternResult tresult4 = captcha.FullTestOnFolder(fullfolder, fullreport);
                                         Out("FULL Testing Complete. Percent Correct: " + tresult4.PercentageCorrect.ToString("0.00") + "%", true);
@@ -609,9 +609,9 @@ namespace ScottClayton.Interpreter
 
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
-                                    // #SKOTDOC.FUNCARG Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
-                                    // #SKOTDOC.FUNCARG ReportFile The file to save the report to.
-                                    // #SKOTDOC.FUNCARG ImageFilter The filter (e.g., *.bmp) to use to find images.
+                                    // #SKOTDOC.FUNCARGSTR Folder The folder that contains a collection of sample CAPTCHA images for testing. The CAPTCHA images need to labeled (named) with the correct solution to CAPTCHA so that there is something to compare the predicted output to and get a percentage correct.
+                                    // #SKOTDOC.FUNCARGSTR ReportFile The file to save the report to.
+                                    // #SKOTDOC.FUNCARGSTR ImageFilter The filter (e.g., *.bmp) to use to find images.
                                     case 3:
                                         PatternResult tresult5 = captcha.FullTestOnFolder(fullfolder, fullreport, fullext);
                                         Out("FULL Testing Complete. Percent Correct: " + tresult5.PercentageCorrect.ToString("0.00") + "%", true);
@@ -636,7 +636,7 @@ namespace ScottClayton.Interpreter
                                     case 1:
                                         // #SKOTDOC.FUNCSTART
                                         // #SKOTDOC.FUNCDESC Solve a CAPTCHA using the logic developed in the current CBL script.
-                                        // #SKOTDOC.FUNCARG ImageLocation The image file to load and solve.
+                                        // #SKOTDOC.FUNCARGSTR ImageLocation The image file to load and solve.
                                         // #SKOTDOC.FUNCEND
 
                                         // #SKOTDOC.FUNCSTART
@@ -687,7 +687,7 @@ namespace ScottClayton.Interpreter
 
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Save the DataBase of trained patterns to a given file.
-                                    // #SKOTDOC.FUNCARG Location The file name to save the pattern database to.
+                                    // #SKOTDOC.FUNCARGSTR Location The file name to save the pattern database to.
                                     case 1:
                                         captcha.SaveToFile(saveLoc);
                                         Out("CAPTCHA Breaking Solution Saved");
@@ -720,7 +720,7 @@ namespace ScottClayton.Interpreter
 
                                     // #SKOTDOC.FUNCSTART
                                     // #SKOTDOC.FUNCDESC Load a pattern database from a specified file.
-                                    // #SKOTDOC.FUNCARG Location The name of the pattern database file to load.
+                                    // #SKOTDOC.FUNCARGSTR Location The name of the pattern database file to load.
                                     case 1:
                                         captcha.LoadFromFile(dbLoc);
                                         Out("CAPTCHA Breaking Solution Loaded");
@@ -740,7 +740,7 @@ namespace ScottClayton.Interpreter
                             case "SAY":
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Print out a line of debug text to the console.
-                                // #SKOTDOC.FUNCARG Text The text to print.
+                                // #SKOTDOC.FUNCARGSTR Text The text to print.
                                 string say = args.GetQuotedArg(1);
                                 Out(say, true);
                                 break;
@@ -857,8 +857,8 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Resize each image to a specified width and height.
                                 case 2:
-                                    // #SKOTDOC.FUNCARG Width The width to resize image to.
-                                    // #SKOTDOC.FUNCARG Height The height to resize image to.
+                                    // #SKOTDOC.FUNCARGINT Width The width to resize image to.
+                                    // #SKOTDOC.FUNCARGINT Height The height to resize image to.
                                     s.Resize(rswidth, rsheight);
                                     Out("Image Resized to " + rswidth + "x" + rsheight);
                                     break;
@@ -890,7 +890,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Erode the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by a given color.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG BackgroundColor The color of the background that surrounds the individual blobs in the image.
+                                    // #SKOTDOC.FUNCARGINT Times Number of times to erode the edges.
                                     for (int i = 0; i < etimes; i++)
                                     {
                                         s.ErodeShapes(Color.White);
@@ -925,7 +925,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Grow the edges of all blobs, where a blob is defined as any pixel grouping completely surrounded by a given color.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG BackgroundColor The color of the background that surrounds the individual blobs in the image.
+                                    // #SKOTDOC.FUNCARGINT Times Number of times to grow the edges.
                                     for (int i = 0; i < gtimes; i++)
                                     {
                                         s.GrowShapes(Color.White);
@@ -973,7 +973,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Subtract one image from another.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG ImageLocation The absolute or relative location to the image to subtract from the working image.
+                                    // #SKOTDOC.FUNCARGSTR ImageLocation The absolute or relative location to the image to subtract from the working image.
                                     Bitmap imageToSub = null;
                                     lock (subtractionImages)
                                     {
@@ -1019,7 +1019,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Perform a convolutional median filter on the image several times.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG NumTimes The number of times to apply the Median filter to the image.
+                                    // #SKOTDOC.FUNCARGINT NumTimes The number of times to apply the Median filter to the image.
                                     for (int i = 0; i < mtimes; i++)
                                     {
                                         s.Median();
@@ -1070,10 +1070,10 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Crop the image to a given rectangle.
                                 case 4:
-                                    // #SKOTDOC.FUNCARG X The left side of the rectangle.
-                                    // #SKOTDOC.FUNCARG Y The top of the rectangle.
-                                    // #SKOTDOC.FUNCARG Width The width of the rectangle.
-                                    // #SKOTDOC.FUNCARG Height The height of the rectangle.
+                                    // #SKOTDOC.FUNCARGINT X The left side of the rectangle.
+                                    // #SKOTDOC.FUNCARGOMT Y The top of the rectangle.
+                                    // #SKOTDOC.FUNCARGINT Width The width of the rectangle.
+                                    // #SKOTDOC.FUNCARGINT Height The height of the rectangle.
                                     s.Crop(new Rectangle(cx, cy, cw, ch));
                                     Out("Image Cropped");
                                     break;
@@ -1129,8 +1129,8 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Fill all blobs within a given distance in the L`*`a`*`b`*` colorspace with a random color.
                                 case 2:
-                                    // #SKOTDOC.FUNCARG ColorTolerance The maximum Delta E difference between two (L`*`a`*`b`*`) colors to allow when filling a blob. I.E., the colors have to be at most this close together to be considered to be in the same blob.
-                                    // #SKOTDOC.FUNCARG BackgroundTolerance The maximum Delta E difference between a pixel (L`*`a`*`b`*`) and the background to allow when filling.
+                                    // #SKOTDOC.FUNCARGDBL ColorTolerance The maximum Delta E difference between two (L`*`a`*`b`*`) colors to allow when filling a blob. I.E., the colors have to be at most this close together to be considered to be in the same blob.
+                                    // #SKOTDOC.FUNCARGDBL BackgroundTolerance The maximum Delta E difference between a pixel (L`*`a`*`b`*`) and the background to allow when filling.
                                     s.ColorFillBlobs(cfbtolerance, Color.White, cfbbkgtol);
                                     Out("Blobs within " + cfbtolerance.ToString("0.00") + " tolerance (L*a*b* color space) filled");
                                     break;
@@ -1157,9 +1157,9 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Remove blobs from an image that are too small by either pixel count or X and Y dimensions.
                                 case 3:
-                                    // #SKOTDOC.FUNCARG MinPixelCount The smallest number of pixels a blob can be made of.
-                                    // #SKOTDOC.FUNCARG MinWidth The smallest width a blob can be.
-                                    // #SKOTDOC.FUNCARG MinHeight The smallest height a blob can be.
+                                    // #SKOTDOC.FUNCARGINT MinPixelCount The smallest number of pixels a blob can be made of.
+                                    // #SKOTDOC.FUNCARGINT MinWidth The smallest width a blob can be.
+                                    // #SKOTDOC.FUNCARGINT MinHeight The smallest height a blob can be.
                                     s.RemoveSmallBlobs(rsbcount, rsbwidth, rsbheight, Color.White);
                                     Out("Small blobs removed from image");
                                     break;
@@ -1168,10 +1168,10 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Fill all blobs within a given distance in the L`*`a`*`b`*` colorspace with a random color.
                                 case 4:
-                                    // #SKOTDOC.FUNCARG MinPixelCount The smallest number of pixels a blob can be made of.
-                                    // #SKOTDOC.FUNCARG MinWidth The smallest width a blob can be.
-                                    // #SKOTDOC.FUNCARG MinHeight The smallest height a blob can be.
-                                    // #SKOTDOC.FUNCARG ColorTolerance The RGB tolerance in color when flood filling
+                                    // #SKOTDOC.FUNCARGINT MinPixelCount The smallest number of pixels a blob can be made of.
+                                    // #SKOTDOC.FUNCARGINT MinWidth The smallest width a blob can be.
+                                    // #SKOTDOC.FUNCARGINT MinHeight The smallest height a blob can be.
+                                    // #SKOTDOC.FUNCARGINT ColorTolerance The RGB tolerance in color when flood filling
                                     s.RemoveSmallBlobs(rsbcount, rsbwidth, rsbheight, Color.White, rsbtolerance);
                                     Out("Small blobs removed from image");
                                     break;
@@ -1217,7 +1217,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Convert the image to black and white, where anything above a given threshold is turned white.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG Threshold A threshold value between 0 and 255 that determines what colors turn black and which turn white.
+                                    // #SKOTDOC.FUNCARGINT Threshold A threshold value between 0 and 255 that determines what colors turn black and which turn white.
                                     s.Binarize(thresh);
                                     Out("Image binarized to black and white");
                                     break;
@@ -1249,7 +1249,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Remove all colors withing a certain threshold of a shade of gray from the image leaving only colors.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG Distance The threshold value which determines how close a color has to be to gray to be removed.
+                                    // #SKOTDOC.FUNCARGINT Distance The threshold value which determines how close a color has to be to gray to be removed.
                                     s.RemoveNonColor(dist);
                                     Out("All grayscale colors removed from image");
                                     break;
@@ -1274,7 +1274,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Find the color that occurrs most often in the image within a certain threshold and remove all other colors that are not withing a given threshold from that color.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG Threshold The threshold value which determines how close a color has to be to be kept.
+                                    // #SKOTDOC.FUNCARGINT Threshold The threshold value which determines how close a color has to be to be kept.
                                     s.KeepOnlyMostCommonColor(th);
                                     Out("All but the most common color removed");
                                     break;
@@ -1298,7 +1298,7 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Save a sample of the working image.
                                 case 1:
-                                    // #SKOTDOC.FUNCARG FileLocation The name and location of where to save the image to.
+                                    // #SKOTDOC.FUNCARGSTR FileLocation The name and location of where to save the image to.
                                     s.TrySave(filename);
                                     Out("Image saved as " + args.GetArg(1));
                                     break;
@@ -1332,9 +1332,9 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Apply a mean shift filter a given number of times with a given radius and a given tolerance.
                                 case 3:
-                                    // #SKOTDOC.FUNCARG Iterations The number of times to repeat the filter on the image.
-                                    // #SKOTDOC.FUNCARG Radius The radius of the filter.
-                                    // #SKOTDOC.FUNCARG Tolerance The tolerance that determines how close in color pixels have to be if they are to be considered in the same group.
+                                    // #SKOTDOC.FUNCARGINT Iterations The number of times to repeat the filter on the image.
+                                    // #SKOTDOC.FUNCARGINT Radius The radius of the filter.
+                                    // #SKOTDOC.FUNCARGDBL Tolerance The tolerance that determines how close in color pixels have to be if they are to be considered in the same group.
                                     s.MeanShiftFilter(msiterations, msradius, mstolerance);
                                     Out("Mean Shift Filter (" + msiterations + " iterations)");
                                     break;
@@ -1359,8 +1359,8 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Fill the background color into a region of an image.
                                 case 2:
-                                    // #SKOTDOC.FUNCARG X The X location of the region to start filling from.
-                                    // #SKOTDOC.FUNCARG Y The Y location of the region to start filling from.
+                                    // #SKOTDOC.FUNCARGINT X The X location of the region to start filling from.
+                                    // #SKOTDOC.FUNCARGINT Y The Y location of the region to start filling from.
                                     s.FloodFill(new Point(fwx, fwy), 1, Color.White);
                                     Out("Point flood filled with white");
                                     break;
@@ -1392,15 +1392,15 @@ namespace ScottClayton.Interpreter
                                 // #SKOTDOC.FUNCSTART
                                 // #SKOTDOC.FUNCDESC Perform a convolutional filter on the image with a 3x3 kernel.
                                 case 9:
-                                    // #SKOTDOC.FUNCARG A1 The upper-left value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG A2 The upper-middle value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG A3 The upper-right value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG B1 The middle-left value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG B2 The center value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG B3 The middle-right value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG C1 The lower-left value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG C2 The lower-middle value of the 3x3 kernel.
-                                    // #SKOTDOC.FUNCARG C3 The lower-right value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT A1 The upper-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT A2 The upper-middle value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT A3 The upper-right value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT B1 The middle-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT B2 The center value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT B3 The middle-right value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT C1 The lower-left value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT C2 The lower-middle value of the 3x3 kernel.
+                                    // #SKOTDOC.FUNCARGINT C3 The lower-right value of the 3x3 kernel.
                                     s.ConvolutionFilter(c_a, c_b, c_c, c_d, c_e, c_f, c_g, c_h, c_i);
                                     Out("Convolution filter applied to image.");
                                     break;
