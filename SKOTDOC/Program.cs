@@ -175,8 +175,8 @@ namespace SKOTDOC
                         WikiPage = WikiPage.Substring(0, args[1].LastIndexOf('.'));
                     }
 
-                    // Google Code wiki labels
-                    w.WriteLine("#labels Featured,Phase-Implementation");
+                    // Google Code wiki labels (removed 4/5/15 - migrated to github)
+                    // w.WriteLine("#labels Featured,Phase-Implementation");
 
                     if (verbatim.Length > 0)
                     {
@@ -190,12 +190,15 @@ namespace SKOTDOC
                     foreach (Section s in sections)
                     {
                         w.WriteLine();
-                        w.WriteLine("<table><tr><td colspan=\"2\"><font size=\"4\">*" + s.Name + "_*</font></td><td>*" + s.Description + "*_</td></tr>");
+                        w.WriteLine("##" + s.Name);
+                        w.WriteLine(s.Description);
+                        w.WriteLine();
+                        w.WriteLine("Method | Description");
+                        w.WriteLine("------ | ------");
                         foreach (Function f in s.Functions)
                         {
-                            w.WriteLine("<tr><td width=\"25\"> </td><td width=\"200px\">[" + WikiPage + "#" + f.Name + " " + f.Name + "]</td><td>" + f.Description + "</td></tr>");
+                            w.WriteLine("[" + f.Name + "](#" + f.Name + ") | " + f.Description);
                         }
-                        w.WriteLine("</table>");
                         w.WriteLine();
                     }
 
@@ -203,7 +206,7 @@ namespace SKOTDOC
                     {
                         w.WriteLine();
                         w.WriteLine("----");
-                        w.WriteLine(String.Format("=_{0}_ Section=", s.Name));
+                        w.WriteLine(String.Format("# *{0}* Section", s.Name));
                         w.WriteLine("{0}", s.Description);
                         w.WriteLine();
 
@@ -213,12 +216,15 @@ namespace SKOTDOC
                         foreach (Function f in s.Functions)
                         {
                             w.WriteLine("----");
-                            w.WriteLine(String.Format("=={0}==", f.Name));
+                            w.WriteLine("## {0}", f.Name);
                             w.WriteLine("{0}", f.Description);
 
+                            int overload = 1;
                             foreach (Overload o in f.Overloads)
                             {
-                                w.Write(String.Format("*<code language=\"cobol\">{0}", f.Name));
+                                w.WriteLine();
+                                w.WriteLine("### Overload " + overload++);
+                                w.Write("    " + f.Name);
                                 if (o.Arguments.Count > 0)
                                 {
                                     foreach (Argument a in o.Arguments)
@@ -226,18 +232,16 @@ namespace SKOTDOC
                                         w.Write(String.Format(", {0}", a.Name));
                                     }
                                 }
-                                w.WriteLine("</code>*");
+                                w.WriteLine();
                                 bool both = !String.IsNullOrEmpty(o.Description) && o.Arguments.Count > 0;
                                 if (!String.IsNullOrEmpty(o.Description))
                                 {
                                     w.WriteLine();
-                                    w.WriteLine("<table><tr><td colspan=\"2\">*Description*</td></tr>");
-                                    w.Write("<tr><td><pre>   </pre></td><td>");
-                                    w.Write(String.Format("_{0}_", o.Description));
-                                    w.WriteLine("</td></tr>");
+                                    w.WriteLine("#### Description");
+                                    w.WriteLine(o.Description);
                                     if (!both)
                                     {
-                                        w.WriteLine("</table>");
+                                        w.WriteLine();
                                     }
                                 }
                                 if (o.Arguments.Count > 0)
@@ -245,38 +249,39 @@ namespace SKOTDOC
                                     w.WriteLine();
                                     if (!both)
                                     {
-                                        w.WriteLine("<table>");
+                                        w.WriteLine();
                                     }
-                                    w.WriteLine("<tr><td colspan=\"2\">*Parameters*</td></tr>");
-                                    w.WriteLine("<tr><td><pre>   </pre></td><td>");
+                                    w.WriteLine("#### Parameters");
+                                    w.WriteLine("Name | Type | Description");
+                                    w.WriteLine("----- | ----- | -----");
                                     foreach (Argument a in o.Arguments)
                                     {
                                         if (a.Type == ArgType.LITERAL)
                                         {
-                                            w.WriteLine(String.Format("|| _{0}_ || _Literal Value_ || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("*{0}* | *Literal Value* | {1}", a.Name, a.Description));
                                         }
                                         else if (a.Type == ArgType.DOUBLE)
                                         {
-                                            w.WriteLine(String.Format("|| {0} || Decimal Value || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("{0} | Decimal Value | {1}", a.Name, a.Description));
                                         }
                                         else if (a.Type == ArgType.INT)
                                         {
-                                            w.WriteLine(String.Format("|| {0} || Whole Number || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("{0} | Whole Number | {1}", a.Name, a.Description));
                                         }
                                         else if (a.Type == ArgType.STRING)
                                         {
-                                            w.WriteLine(String.Format("|| {0} || Quoted String || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("{0} | Quoted String | {1}", a.Name, a.Description));
                                         }
                                         else if (a.Type == ArgType.BOOL)
                                         {
-                                            w.WriteLine(String.Format("|| {0} || Boolean (Y/N) || {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("{0} | Boolean (Y/N) | {1}", a.Name, a.Description));
                                         }
                                         else
                                         {
-                                            w.WriteLine(String.Format("|| {0} || Parameter ||  {1} ||", "{{{" + a.Name + "}}}", a.Description));
+                                            w.WriteLine(String.Format("{0} | Parameter |  {1}", a.Name, a.Description));
                                         }
                                     }
-                                    w.WriteLine("</td></tr></table>");
+                                    w.WriteLine();
                                 }
                                 w.WriteLine();
                             }

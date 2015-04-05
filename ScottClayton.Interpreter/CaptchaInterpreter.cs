@@ -13,10 +13,10 @@ using System.IO;
 // Note: Anything prefixed with the SKOTDOC command is for the automatic documentation generator for the Wiki page on Google Docs.
 //
 // #SKOTDOC.DEFINESECTION Setup These are the functions that are placed towards the top of CBL scripts. They set up the methods that will be used to segment and untimately solve the CAPTCHA images.
-// #SKOTDOC.DEFINESECTION Preprocess These are the functions that are placed between the {{{DEFINEPRECONDITIONS}}} and {{{ENDPRECONDITIONS}}} commands. They are run for each image in the set to precondition the image before trying to segment out individual letters.
+// #SKOTDOC.DEFINESECTION Preprocess These are the functions that are placed between the *DEFINEPRECONDITIONS* and *ENDPRECONDITIONS* commands. They are run for each image in the set to precondition the image before trying to segment out individual letters.
 // #SKOTDOC.DEFINESECTION Working These are the functions that are used towards the end of CBL scripts. Most of the functions in this group are used temporarily while developing, testing, or measuring the effectiveness of the script.
 //
-// #SKOTDOC.VERBATIM =CBL Syntax Documentation= 
+// #SKOTDOC.VERBATIM # CBL Syntax Documentation 
 // #SKOTDOC.VERBATIM Here is the basic documentation for each CBL (CAPTCHA Breaking Language) command currently available within the scripting language (there is more you can access when using the .NET library directly). 
 // #SKOTDOC.VERBATIM The plan is to have a programming guide complete with examples and a program structure guide in the near future, but that is dependent on outside forces at the moment. 
 //
