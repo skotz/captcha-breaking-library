@@ -1,0 +1,12 @@
+*.cache
+CAPTCHA Breaking Library 2012.sln.docstates.suo
+*.suo
+*.manifest
+CAPTCHA Breaking Library 2012/bin/Debug/CAPTCHA Breaking Library 2012.vshost.exe
+SKOTDOC/obj/x86/Debug/SKOTDOC.exe
+SKOTDOC/bin/Debug/SKOTDOC.vshost.exe
+SKOTDOC/bin/Debug/SKOTDOC.exe
+SKOTDOC/bin/Debug/SKOTDOC.pdb
+SKOTDOC/obj/x86/Debug/SKOTDOC.pdb
+SKOTDOC/obj/x86/Debug/SKOTDOC.csproj.FileListAbsolute.txt
+SKOTDOC/bin/Debug/Syntax.wiki

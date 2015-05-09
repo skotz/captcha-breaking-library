@@ -96,23 +96,14 @@ namespace ScottClayton.CAPTCHA.Image
         {
             if (vectors.Count == 0)
             {
-                throw new CaptchaSolverException("There are no patterns loaded to match a sample pattern to!");
+                throw new CaptchaSolverException("There are no patterns loaded to which a sample pattern may be matched!");
             }
 
             int index = 0;
             double best = BitmapVector.RootMeanSquareDistance(vectors[0].Scale(), v.Scale());
 
-            //vectors[0].GetBitmap().Save("getmatch-a--" + index.ToString() + ".bmp");
-            //v.GetBitmap().Save("getmatch--b-" + index.ToString() + ".bmp");
-            //(vectors[0].Scale() - v.Scale()).GetBitmap().Save("getmatch-ab-" + index.ToString() + ".bmp");
-
-            //for (int i = 1; i < vectors.Count; i++)
             Parallel.For(1, vectors.Count, i =>
             {
-                //vectors[i].GetBitmap().Save("getmatch-a--" + i.ToString() + ".bmp");
-                //v.GetBitmap().Save("getmatch--b-" + i.ToString() + ".bmp");
-                //(vectors[i].Scale() - v.Scale()).GetBitmap().Save("getmatch-ab-" + i.ToString() + ".bmp");
-
                 double test = BitmapVector.RootMeanSquareDistance(vectors[i].Scale(), v.Scale());
 
                 if (test < best)
@@ -129,23 +120,14 @@ namespace ScottClayton.CAPTCHA.Image
         {
             if (vectors.Count == 0)
             {
-                throw new CaptchaSolverException("There are no patterns loaded to match a sample pattern to!");
+                throw new CaptchaSolverException("There are no patterns loaded to which a sample pattern may be matched!");
             }
 
             int index = 0;
             double best = BitmapVector.RootMeanSquareDistance(vectors[0] / Count, v);
 
-            //vectors[0].GetBitmap().Save("getmatch-a--" + index.ToString() + ".bmp");
-            //v.GetBitmap().Save("getmatch--b-" + index.ToString() + ".bmp");
-            //(vectors[0].Scale() - v.Scale()).GetBitmap().Save("getmatch-ab-" + index.ToString() + ".bmp");
-
-            //for (int i = 1; i < vectors.Count; i++)
             Parallel.For(1, vectors.Count, i =>
             {
-                //vectors[i].GetBitmap().Save("getmatch-a--" + i.ToString() + ".bmp");
-                //v.GetBitmap().Save("getmatch--b-" + i.ToString() + ".bmp");
-                //(vectors[i].Scale() - v.Scale()).GetBitmap().Save("getmatch-ab-" + i.ToString() + ".bmp");
-
                 double test = BitmapVector.RootMeanSquareDistance(vectors[i] / Count, v);
 
                 if (test < best)
