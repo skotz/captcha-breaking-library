@@ -1,0 +1,32 @@
+**********************************************************
+* Scott Clayton                           April 14, 2012 *
+**********************************************************
+* This script is part of the CBL interpreter:            *
+* http://code.google.com/p/captcha-breaking-library/     *
+**********************************************************
+* The CAPTCHA that this script breaks came from:         *
+* http://www.codeproject.com/Articles/5947/CAPTCHA-Image *
+**********************************************************
+
+SetMode,        all
+SetupSegmenter, BLOB, 4, 14, 8
+SetupSolver,    MNN, "0123456789", 20, 20, 8, 150, 0.95
+Load,           "mnn.solver.db"
+
+DefinePreconditions
+   Resize,           400, 100
+   Subtract,         "merge3.bmp"
+   Invert
+   Median, 1
+   MeanShift,        1, 2, 5
+   Binarize, 150
+   ColorFillBlobs,   80, 52
+   RemoveSmallBlobs, 90, 4, 14
+   HistogramRotate
+   Binarize,         200
+   ColorFillBlobs
+EndPreconditions
+
+Solve, %IMAGE%
+
+

@@ -1,0 +1,18 @@
+**************************************************
+*          CryptograPHP CAPTCHA Breaker          *
+**************************************************
+* Estimated CAPTCHA Solving Accuracy:     90.17% *
+* Average attempts to solve a CAPTCHA: 0.298 ~ 1 *
+**************************************************
+*               Scott Clayton 2012               *
+**************************************************
+
+SetupSegmenter, BLOB, 8, 8, 4
+SetupSolver,    BVS, "234569ABCDEFGHKLMNPRTWXYZ", 32, 32
+Load,           "cryptographp.db"
+
+DefinePreconditions
+   Binarize, 230
+EndPreconditions
+
+Solve, %IMAGE%

@@ -1,0 +1,20 @@
+**************************************************
+*   This script breaks the ADSSAntiBot CAPTCHA   *
+**************************************************
+* Estimated CAPTCHA Solving Accuracy:    2.5498% *
+* Average attempts to solve a CAPTCHA:   27      *
+**************************************************
+*               Scott Clayton 2012               *
+**************************************************
+
+SetupSegmenter, HIST, 12, 5
+SetupSolver,    BVS, "0123456789", 50, 50
+Load,           "adssantibot.db"
+
+DefinePreconditions
+   Resize, 500, 80
+   ColorFillBlobs, 100, 60
+   BlackAndWhite
+EndPreconditions
+
+Solve, %IMAGE%

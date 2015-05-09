@@ -2,6 +2,8 @@
 CAPTCHA Breaking Library 2012.sln.docstates.suo
 *.suo
 *.manifest
+bin/
+obj/
 CAPTCHA Breaking Library 2012/bin/Debug/CAPTCHA Breaking Library 2012.vshost.exe
 SKOTDOC/obj/x86/Debug/SKOTDOC.exe
 SKOTDOC/bin/Debug/SKOTDOC.vshost.exe
