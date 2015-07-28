@@ -67,3 +67,5 @@ There is now a [Notepad++](http://notepad-plus-plus.org/) syntax highlighting pl
 
 
 _Scott_
+
+Exported from my old [Google Code](https://code.google.com/p/captcha-breaking-library/) repository.
