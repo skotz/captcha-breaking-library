@@ -31,31 +31,32 @@ namespace CAPTCHA_Language_Interpreter
                         Console.ReadKey();
                     }
                 }
-                //// COMPILE
-                //else if (args[0].ToUpper() == "-C")
-                //{
-                //    if (File.Exists(args[1]))
-                //    {
-                //        string program = File.ReadAllText(args[1]);
-
-                //        if (program.ToUpper().Contains("%IMAGE%"))
-                //        {
-                //            byte[] code = CompileScript(program);
-
-
-                //        }
-                //        else
-                //        {
-                //            Console.WriteLine("Compiled CAPTCHA Breaker scripts must contain a \"Solve, %IMAGE%\" command.");
-                //            Console.ReadKey();
-                //        }
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine("The file you specified does not exist!");
-                //        Console.ReadKey();
-                //    }
-                //}
+            }
+            else if (args.Length == 3)
+            {
+                // SCRIPT RUN - Training Mode
+                if (args[0].ToUpper() == "-S" && args[2].ToUpper() == "-T")
+                {
+                    if (File.Exists(args[1]))
+                    {
+                        string program = File.ReadAllText(args[1]);
+                        Directory.SetCurrentDirectory(new FileInfo(args[1]).DirectoryName);
+                        CaptchaInterpreter run = new CaptchaInterpreter(program, true);
+                        run.Execute();
+                    }
+                    else
+                    {
+                        Console.WriteLine("The file you specified does not exist!");
+                        try
+                        {
+                            Console.Read();
+                        }
+                        catch
+                        {
+                            Console.ReadKey();
+                        }
+                    }
+                }
             }
             else if (args.Length == 4)
             {
@@ -93,7 +94,17 @@ namespace CAPTCHA_Language_Interpreter
             }
             else
             {
-                Console.WriteLine("You must specify a captcha breaking script to run!");
+                Console.WriteLine("CAPTCHA Breaking Scripting Language Interpreter");
+                Console.WriteLine("https" + "://github.com/skotz/captcha-breaking-library");
+                Console.WriteLine();
+                Console.WriteLine("Usage:");
+                Console.WriteLine("    Execute a script:");
+                Console.WriteLine("        cbli.exe -s <scriptFile.captcha>");
+                Console.WriteLine("    Execute a script in training mode:");
+                Console.WriteLine("        cbli.exe -s <scriptFile.captcha> -t");
+                Console.WriteLine("    Execute a script and pass an image to solve:");
+                Console.WriteLine("        cbli.exe -s <scriptFile.captcha> -i <imageToSolve.bmp>");
+                Console.WriteLine();
                 Console.ReadKey();
             }
         }

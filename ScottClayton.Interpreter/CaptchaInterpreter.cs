@@ -35,6 +35,8 @@ namespace ScottClayton.Interpreter
 
         private MODE mode = MODE.WARN;
 
+        private bool training;
+
         //private string recreationData;
 
         //private const string SPLITTER = ";~|!|~;";
@@ -53,13 +55,24 @@ namespace ScottClayton.Interpreter
         private Dictionary<string, Bitmap> subtractionImages;
 
         public CaptchaInterpreter(string program)
-            : this(program, null)
+            : this(program, null, false)
+        {
+        }
+
+        public CaptchaInterpreter(string program, bool trainingMode)
+            : this(program, null, trainingMode)
         {
         }
 
         public CaptchaInterpreter(string program, Bitmap image)
+            : this(program, image, false)
+        {
+        }
+
+        public CaptchaInterpreter(string program, Bitmap image, bool trainingMode)
         {
             ProgramCode = program;
+            training = trainingMode;
 
             foreach (string term in CONST.LINE_TERMINATORS)
             {
@@ -90,6 +103,11 @@ namespace ScottClayton.Interpreter
             {
                 OnGlobalBitmapMessage(images.MergeHorizontal());
             }
+        }
+
+        public void Silence()
+        {
+            mode = MODE.QUIET;
         }
 
         public string Execute()
@@ -502,7 +520,13 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKSTART TESTSEGMENT
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Test the preprocessing and segmentation setup on a test image and save the segmented parts to a folder.
+                            // #SKOTDOC.TRAINONLY
                             case "TESTSEGMENT":
+                                if (!training)
+                                {
+                                    break;
+                                }
+
                                 string tsimage = args.GetQuotedArg(1);
                                 string tsfolder = args.GetQuotedArg(2);
 
@@ -528,7 +552,13 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKSTART TRAIN
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Train the solver on the patterns acquired or loaded.
+                            // #SKOTDOC.TRAINONLY
                             case "TRAIN":
+                                if (!training)
+                                {
+                                    break;
+                                }
+
                                 string tfolder = args.GetQuotedArg(1);
                                 int titerations = args.GetArg(2).ToInt();
 
@@ -565,7 +595,13 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKSTART TEST
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Test the solver's ability to produce correct predictions on the patterns acquired or loaded. (Use patterns that were not used in training or you will get skewed results.)
+                            // #SKOTDOC.TRAINONLY
                             case "TEST":
+                                if (!training)
+                                {
+                                    break;
+                                }
+
                                 string testfolder = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
@@ -590,7 +626,13 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKSTART FULLTEST
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Perform a full test (completely solving a CAPTCHA) and give the actual percentage of CAPTCHAs that were completely and correctly solved.
+                            // #SKOTDOC.TRAINONLY
                             case "FULLTEST":
+                                if (!training)
+                                {
+                                    break;
+                                }
+
                                 string fullfolder = args.GetQuotedArg(1);
                                 string fullreport = args.GetQuotedArg(2);
                                 string fullext = args.GetQuotedArg(3);
@@ -672,7 +714,13 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKSTART SAVE
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Save the DataBase of trained patterns to a file so that it can be loaded later. The idea is to distribute the database file with your finished script (the finished script shouldn't do any training, only efficient solving).
+                            // #SKOTDOC.TRAINONLY
                             case "SAVE":
+                                if (!training)
+                                {
+                                    break;
+                                }
+
                                 string saveLoc = args.GetQuotedArg(1);
 
                                 switch (args.Count - 1)
@@ -705,6 +753,12 @@ namespace ScottClayton.Interpreter
                             // #SKOTDOC.BLOCKTYPE Working
                             // #SKOTDOC.BLOCKDESC Load a pattern database. The database you load needs to have been saved under the same setup conditions as the script is being loaded under.
                             case "LOAD":
+                                // Only when not training
+                                if (training)
+                                {
+                                    break;
+                                }
+
                                 string dbLoc = args.GetQuotedArg(1);
                                 string base64 = args.GetQuotedArg(2);
 

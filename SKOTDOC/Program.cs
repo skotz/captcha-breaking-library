@@ -10,7 +10,7 @@ namespace SKOTDOC
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("SKOTDOC v1.0 - Scott Clayton 2012");
+            Console.WriteLine("SKOTDOC v1.0 - Scott Clayton 2012-2015");
             Console.WriteLine("For generating documentation in Wiki format for the CAPTCHA Breaking Language");
 
             string verbatim = "";
@@ -71,6 +71,12 @@ namespace SKOTDOC
                                         if (inBlock)
                                         {
                                             current.Description += data + " ";
+                                        }
+                                        break;
+                                    case "TRAINONLY":
+                                        if (inBlock)
+                                        {
+                                            current.TrainingOnly = true;
                                         }
                                         break;
                                     case "BLOCKTYPE":
@@ -218,6 +224,10 @@ namespace SKOTDOC
                             w.WriteLine("----");
                             w.WriteLine("## {0}", f.Name);
                             w.WriteLine("{0}", f.Description);
+                            if (f.TrainingOnly)
+                            {
+                                w.WriteLine("This method is only available when running in Training Mode.");
+                            }
 
                             int overload = 1;
                             foreach (Overload o in f.Overloads)
@@ -324,6 +334,7 @@ namespace SKOTDOC
         public List<Overload> Overloads { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool TrainingOnly { get; set; }
 
         public Function()
         {
