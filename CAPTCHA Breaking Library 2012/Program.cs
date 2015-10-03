@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CAPTCHA_Breaking_Library_2012
+namespace CaptchaBreakingLibrary
 {
     static class Program
     {

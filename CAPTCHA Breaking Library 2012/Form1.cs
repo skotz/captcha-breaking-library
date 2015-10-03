@@ -10,7 +10,7 @@ using ScottClayton.CAPTCHA;
 using ScottClayton.Image;
 using ScottClayton.Neural;
 
-namespace CAPTCHA_Breaking_Library_2012
+namespace CaptchaBreakingLibrary
 {
     public partial class Form1 : Form
     {

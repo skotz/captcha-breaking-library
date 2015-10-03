@@ -1,4 +1,4 @@
-﻿namespace CAPTCHA_Breaking_Library_2012
+﻿namespace CaptchaBreakingLibrary
 {
     partial class Form1
     {
