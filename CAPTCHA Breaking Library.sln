@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaking Library", "CAPTCHA Breaking Library 2012\CAPTCHA Breaking Library.csproj", "{625D5992-52E2-42F7-96B1-B5DE9DBD8168}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottClayton.CAPTCHA", "ScottClayton.CAPTCHA\ScottClayton.CAPTCHA.csproj", "{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}"
