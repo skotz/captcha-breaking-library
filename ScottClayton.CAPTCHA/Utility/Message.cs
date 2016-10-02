@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ScottClayton.Image;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using ScottClayton.Image;
+using System.Linq;
 
 namespace ScottClayton.CAPTCHA.Utility
 {
@@ -19,7 +18,7 @@ namespace ScottClayton.CAPTCHA.Utility
         public static bool ALLOW_MESSAGES = false;
 
         public delegate void MessageHandler(string message);
-        
+
         /// <summary>
         /// Raised whenever a new message is sent
         /// </summary>

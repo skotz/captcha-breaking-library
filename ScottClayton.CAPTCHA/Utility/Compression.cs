@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.IO.Compression;
 
 namespace ScottClayton.Utility
 {
+    /// <summary>
+    /// Provides GZip compression methods for byte arrays
+    /// </summary>
     public static class Compressor
     {
         /// <summary>
@@ -23,22 +23,19 @@ namespace ScottClayton.Utility
 
                 ms.Position = 0;
 
-                using (MemoryStream outStream = new MemoryStream())
-                {
-                    byte[] compressed = new byte[ms.Length];
-                    ms.Read(compressed, 0, compressed.Length);
+                byte[] compressed = new byte[ms.Length];
+                ms.Read(compressed, 0, compressed.Length);
 
-                    byte[] gzBuffer = new byte[compressed.Length + 4];
-                    Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
-                    Buffer.BlockCopy(BitConverter.GetBytes(input.Length), 0, gzBuffer, 0, 4);
+                byte[] gzBuffer = new byte[compressed.Length + 4];
+                Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
+                Buffer.BlockCopy(BitConverter.GetBytes(input.Length), 0, gzBuffer, 0, 4);
 
-                    return gzBuffer;
-                }
+                return gzBuffer;
             }
         }
 
         /// <summary>
-        /// Decompress data that was compressed
+        /// Decompress data that was compressed with GZip
         /// </summary>
         public static byte[] Decompress(byte[] input)
         {

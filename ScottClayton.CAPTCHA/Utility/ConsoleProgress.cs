@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 
 namespace ScottClayton.CAPTCHA.Utility
@@ -57,7 +54,7 @@ namespace ScottClayton.CAPTCHA.Utility
             }
         }
 
-        void worker_DoWork(object sender, DoWorkEventArgs e)
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
@@ -76,14 +73,17 @@ namespace ScottClayton.CAPTCHA.Utility
                             Console.Write("\b-");
                             step++;
                             break;
+
                         case 1:
                             Console.Write("\b\\");
                             step++;
                             break;
+
                         case 2:
                             Console.Write("\b|");
                             step++;
                             break;
+
                         case 3:
                             Console.Write("\b/");
                             step = 0;
