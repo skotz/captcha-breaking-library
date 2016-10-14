@@ -598,7 +598,6 @@ namespace ScottClayton.CAPTCHA
         public void SilenceConsoleOut()
         {
             ConsoleProgress.AllowOutput = false;
-            ConsoleSpinner.AllowOutput = false;
         }
 
         void asyncSetCreater_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

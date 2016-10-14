@@ -107,9 +107,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Compression.cs" />
     <Compile Include="Utility\ConsoleProgress.cs" />
-    <Compile Include="Utility\ConsoleSpinner.cs" />
+    <Compile Include="Utility\ConsoleProgressOutput.cs" />
     <Compile Include="Utility\Extensions.cs" />
+    <Compile Include="Utility\IProgressOutput.cs" />
     <Compile Include="Utility\Message.cs" />
+    <Compile Include="Utility\StringProgressOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="opencv_imgproc220.dll">

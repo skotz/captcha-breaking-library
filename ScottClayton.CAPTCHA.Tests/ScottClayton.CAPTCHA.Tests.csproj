@@ -51,8 +51,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CompressionTests.cs" />
+    <Compile Include="Utility\CompressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ConsoleProgressTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScottClayton.CAPTCHA\ScottClayton.CAPTCHA.csproj">

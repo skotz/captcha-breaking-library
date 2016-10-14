@@ -5,7 +5,7 @@ namespace ScottClayton.CAPTCHA.Utility
 {
     /// <summary>
     /// A console progress bar that can be put into a using statement.
-    /// One period will be used for every 2 percentile marks.
+    /// One period will be used for every 4 percentile marks.
     /// </summary>
     public class ConsoleProgress : IDisposable
     {
@@ -14,9 +14,12 @@ namespace ScottClayton.CAPTCHA.Utility
         private int sleepTime;
         private string startMessage;
         private int percentage;
+        private int writtenDots;
 
         private static bool allowOut = true;
         public static bool AllowOutput { get { return allowOut; } set { allowOut = value; } }
+
+        private IProgressOutput WriteOutput;
 
         public ConsoleProgress(string message)
             : this(message, 250)
@@ -24,6 +27,11 @@ namespace ScottClayton.CAPTCHA.Utility
         }
 
         public ConsoleProgress(string message, int refreshMiliseconds)
+            : this(message, refreshMiliseconds, new ConsoleProgressOutput())
+        {
+        }
+
+        public ConsoleProgress(string message, int refreshMiliseconds, IProgressOutput writeOutput)
         {
             worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
@@ -31,6 +39,9 @@ namespace ScottClayton.CAPTCHA.Utility
 
             sleepTime = refreshMiliseconds;
             startMessage = message;
+
+            WriteOutput = writeOutput;
+            writtenDots = 0;
 
             Start();
         }
@@ -44,12 +55,15 @@ namespace ScottClayton.CAPTCHA.Utility
 
                 if (AllowOutput)
                 {
-                    Console.Write("\b\b\b\b\b\b\b");
-                    if (percentage % 2 == 0)
+                    WriteOutput.Backspace(7);
+
+                    while (writtenDots < percentage / 4)
                     {
-                        Console.Write(".");
+                        WriteOutput.Write(".");
+                        writtenDots++;
                     }
-                    Console.Write(" " + percentage.ToString().PadLeft(3, ' ') + "% -");
+
+                    WriteOutput.Write(" " + percentage.ToString().PadLeft(3, ' ') + "% -");
                 }
             }
         }
@@ -70,22 +84,26 @@ namespace ScottClayton.CAPTCHA.Utility
                     switch (step)
                     {
                         case 0:
-                            Console.Write("\b-");
+                            WriteOutput.Backspace(1);
+                            WriteOutput.Write("-");
                             step++;
                             break;
 
                         case 1:
-                            Console.Write("\b\\");
+                            WriteOutput.Backspace(1);
+                            WriteOutput.Write("\\");
                             step++;
                             break;
 
                         case 2:
-                            Console.Write("\b|");
+                            WriteOutput.Backspace(1);
+                            WriteOutput.Write("|");
                             step++;
                             break;
 
                         case 3:
-                            Console.Write("\b/");
+                            WriteOutput.Backspace(1);
+                            WriteOutput.Write("/");
                             step = 0;
                             break;
                     }
@@ -97,16 +115,12 @@ namespace ScottClayton.CAPTCHA.Utility
         {
             if (AllowOutput)
             {
-                Console.Write(startMessage + " 000% -");
+                WriteOutput.Write(startMessage + "    0% -");
             }
             step = 0;
             worker.RunWorkerAsync();
         }
 
-        /// <summary>
-        /// Sometimes I don't know why, but I like implementing IDisposable.
-        /// Just thought I'd throw that out there.
-        /// </summary>
         public void Dispose()
         {
             Stop();
@@ -118,8 +132,8 @@ namespace ScottClayton.CAPTCHA.Utility
 
             if (AllowOutput)
             {
-                Console.Write("\b\b\b\b\b\b\b 100% ");
-                Console.WriteLine();
+                SetPercent(100);
+                WriteOutput.Backspace(2);
             }
         }
     }

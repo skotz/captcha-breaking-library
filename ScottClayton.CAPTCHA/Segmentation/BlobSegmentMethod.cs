@@ -67,8 +67,7 @@ namespace ScottClayton.Image
             int sum = 0;
             int close = 5;
 
-            ConsoleSpinner prog = new ConsoleSpinner("Segmenting ");
-            prog.Start();
+            ConsoleProgress prog = new ConsoleProgress("Segmenting ");
             
             // Create a separate bitmap for each distinct color in the image
             while (!((c = GetNextNonWhitePixel(close)).Subtract(Color.White) < close))
