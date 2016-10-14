@@ -11,6 +11,24 @@ namespace ScottClayton.Neural
         public DoubleVector Outputs { get; set; }
         public double Error { get; set; }
 
-        // SAVE AND LOAD
+        public Pattern()
+        {
+
+        }
+
+        public Pattern(double[] inputs, double[] outputs)
+        {
+            Inputs = new DoubleVector(inputs.Length);
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                Inputs[i] = inputs[i];
+            }
+
+            Outputs = new DoubleVector(outputs.Length);
+            for (int i = 0; i < outputs.Length; i++)
+            {
+                Outputs[i] = outputs[i];
+            }
+        }
     }
 }

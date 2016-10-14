@@ -28,7 +28,7 @@ namespace ScottClayton.CAPTCHA.Tests
             Assert.AreEqual(output.ProgressOutput, "Test ............  50% -");
             
             prog.Stop();
-            Assert.AreEqual(output.ProgressOutput, "Test ......................... 100% ");
+            Assert.AreEqual(output.ProgressOutput, "Test ......................... 100%");
         }
     }
 }

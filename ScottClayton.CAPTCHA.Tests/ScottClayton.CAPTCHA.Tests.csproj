@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Solvers\BitmapSubtractionSolverTests.cs" />
     <Compile Include="Utility\CompressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\ConsoleProgressTests.cs" />
