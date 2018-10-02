@@ -18,7 +18,7 @@ and then the [interpreter walkthrough](https://github.com/skotz/captcha-breaking
 
 ## Example ##
 
-Here is a code snippet written in CBL that breaks a CAPTCHA originally from [here](http://www.codeproject.com/Articles/5947/CAPTCHA-Imag.
+Here is a code snippet written in CBL that breaks a CAPTCHA originally from [here](http://www.codeproject.com/Articles/5947/CAPTCHA-Imag).
 
 ![CAPTCHA](https://github.com/skotz/captcha-breaking-library/blob/master/ART/42028351.png)
 
