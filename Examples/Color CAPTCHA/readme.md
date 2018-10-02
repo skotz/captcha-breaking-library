@@ -59,7 +59,7 @@ Image saved as "step4.bmp"
 Test segmentation of "images/194224.bmp" complete
 ```
 
-![GUI](https://github.com/skotz/captcha-breaking-library/examples/color captcha/readme/segments.png)
+![Segments](https://cdn.rawgit.com/skotz/captcha-breaking-library/62660e0f/Examples/Color%20CAPTCHA/readme/segments.png)
 
 Continue to play around with the image manipulation methods until you're able to cleanly segment as many images as possible.
 
@@ -180,4 +180,4 @@ CAPTCHA Solution: 965057
 
 You can also load this script with the CBL GUI.
 
-![GUI](https://github.com/skotz/captcha-breaking-library/examples/color captcha/readme/gui.png)
+![GUI](https://cdn.rawgit.com/skotz/captcha-breaking-library/62660e0f/Examples/Color%20CAPTCHA/readme/gui.png)
