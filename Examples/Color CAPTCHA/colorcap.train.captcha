@@ -1,0 +1,26 @@
+** Show all messages
+SetMode, all
+
+** Use the blob segmentation method
+SetupSegmenter, BLOB, 15, 15, 6
+
+** Use the bitmap vector subtraction classifier, set the character set to just numbers,
+** and specify the dimentions to which each extracted character should be resized
+SetupSolver, BVS, "0123456789", 20, 20, Y
+
+** This block contains a set of image manipulation instructions for preprocessing the image
+** so that it can be more easily segmented into individual characters
+DefinePreconditions
+    REMOVENONCOLOR, 60
+    MEDIAN, 1
+    BINARIZE, 80
+EndPreconditions
+
+** Train the model on a folder full of images
+TRAIN, "images"
+
+** Run some tests to see just how accurate our model is
+FULLTEST, "images", "fulltest.txt"
+
+** Save the trained model to a database file
+SAVE, "colorcap.db"

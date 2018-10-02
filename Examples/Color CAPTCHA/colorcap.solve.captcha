@@ -1,0 +1,16 @@
+** This is the final solver script, so we can disable debug mode
+SetMode, quiet
+SetupSegmenter, BLOB, 15, 15, 6
+SetupSolver, BVS, "0123456789", 20, 20, Y
+
+** Load the trained classifier
+Load, "colorcap.db"
+
+DefinePreconditions
+    REMOVENONCOLOR, 60
+    MEDIAN, 1
+    BINARIZE, 80
+EndPreconditions
+
+** Solve an image passed to the script via the command line or the GUI tool
+SOLVE, %image%
