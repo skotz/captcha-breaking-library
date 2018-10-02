@@ -13,8 +13,8 @@ This allows most multicolor CAPTCHAs to be solved quite trivially.
 
 To get started, check out the 
 [hello world tutorial](https://github.com/skotz/captcha-breaking-library/blob/wiki/HelloWorld.md),
-the [scripting language syntax](https://github.com/skotz/captcha-breaking-library/blob/wiki/Syntax.md),
-and then the [interpreter walkthrough](https://github.com/skotz/captcha-breaking-library/tree/master/Examples/Color%20CAPTCHA/readme.md).
+the [language syntax](https://github.com/skotz/captcha-breaking-library/blob/wiki/Syntax.md),
+and the [solver walkthrough](https://github.com/skotz/captcha-breaking-library/tree/master/Examples/Color%20CAPTCHA/readme.md).
 
 ## Example ##
 
