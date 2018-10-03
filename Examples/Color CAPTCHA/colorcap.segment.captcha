@@ -1,0 +1,25 @@
+** Show all messages
+SetMode, all
+
+** Use the blob segmentation method
+SetupSegmenter, BLOB, 15, 15, 6
+
+** Use the bitmap vector subtraction classifier, set the character set to just numbers,
+** and specify the dimentions to which each extracted character should be resized
+SetupSolver, BVS, "0123456789", 20, 20, Y
+
+** This block contains a set of image manipulation instructions for preprocessing the image
+** so that it can be more easily segmented into individual characters
+DefinePreconditions
+    ** It helps to save a copy of the image after each operation for debugging
+    SAVESAMPLE, "step1.bmp"
+    REMOVENONCOLOR, 60
+    SAVESAMPLE, "step2.bmp"
+    MEDIAN, 1
+    SAVESAMPLE, "step3.bmp"
+    BINARIZE, 80
+    SAVESAMPLE, "step4.bmp"
+EndPreconditions
+
+** Test the segmentation steps on an image and save the individual characters to a folder
+TESTSEGMENT, "images/194224.bmp", "segmented"

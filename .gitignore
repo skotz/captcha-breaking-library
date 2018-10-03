@@ -12,3 +12,6 @@ SKOTDOC/bin/Debug/SKOTDOC.pdb
 SKOTDOC/obj/x86/Debug/SKOTDOC.pdb
 SKOTDOC/obj/x86/Debug/SKOTDOC.csproj.FileListAbsolute.txt
 SKOTDOC/bin/Debug/Syntax.wiki
+Examples/Color CAPTCHA/*.dll
+Examples/Color CAPTCHA/*.exe
+Examples/Color CAPTCHA/ERROR.txt
