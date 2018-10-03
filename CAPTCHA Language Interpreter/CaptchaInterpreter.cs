@@ -173,6 +173,7 @@ namespace ScottClayton.Interpreter
                                     // #SKOTDOC.LITERAL WARN Only output error or warning messages.
                                     case "WARN":
                                         mode = MODE.WARN;
+                                        captcha.SilenceConsoleOut();
                                         Out("Mode set to WARN");
                                         break;
                                     // #SKOTDOC.FUNCEND
@@ -182,6 +183,7 @@ namespace ScottClayton.Interpreter
                                     // #SKOTDOC.LITERAL QUIET Do not print any information to the screen unless something fatal happened.
                                     case "QUIET":
                                         mode = MODE.QUIET;
+                                        captcha.SilenceConsoleOut();
                                         Out("Mode set to QUIET");
                                         break;
                                     // #SKOTDOC.FUNCEND
