@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CAPTCHA_Breaker_IDE.Properties {
+namespace CBL.Environment.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

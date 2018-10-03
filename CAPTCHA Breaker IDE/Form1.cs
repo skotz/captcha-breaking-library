@@ -6,9 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ScottClayton.CAPTCHA;
-using ScottClayton.Interpreter;
 using System.IO;
+using ScottClayton.Interpreter;
 
 namespace CAPTCHA_Breaker_IDE
 {

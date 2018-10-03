@@ -3,21 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaking Library", "CAPTCHA Breaking Library 2012\CAPTCHA Breaking Library.csproj", "{625D5992-52E2-42F7-96B1-B5DE9DBD8168}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Debug", "CAPTCHA Breaking Library 2012\CBL.Debug.csproj", "{625D5992-52E2-42F7-96B1-B5DE9DBD8168}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottClayton.CAPTCHA", "ScottClayton.CAPTCHA\ScottClayton.CAPTCHA.csproj", "{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Core", "ScottClayton.CAPTCHA\CBL.Core.csproj", "{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottClayton.Interpreter", "ScottClayton.Interpreter\ScottClayton.Interpreter.csproj", "{0B8DD132-31FE-4C61-98C0-15BA4474F891}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Interpreter", "CAPTCHA Language Interpreter\CBL.Interpreter.csproj", "{3AD05C07-8B64-4EBD-9909-2016D5F737CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Language Interpreter", "CAPTCHA Language Interpreter\CAPTCHA Language Interpreter.csproj", "{3AD05C07-8B64-4EBD-9909-2016D5F737CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Environment", "CAPTCHA Breaker IDE\CBL.Environment.csproj", "{C0034A2C-78D5-4A72-BA3E-ECBB121316AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaker IDE", "CAPTCHA Breaker IDE\CAPTCHA Breaker IDE.csproj", "{C0034A2C-78D5-4A72-BA3E-ECBB121316AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Interface", "CAPTCHA Breaker Compiled\CBL.Interface.csproj", "{469CBBE7-9115-4B07-B118-FA1FF6A34278}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPTCHA Breaker GUI", "CAPTCHA Breaker Compiled\CAPTCHA Breaker GUI.csproj", "{469CBBE7-9115-4B07-B118-FA1FF6A34278}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Interpreter.Docs", "SKOTDOC\CBL.Interpreter.Docs.csproj", "{646B8EEC-54E2-4309-9DC3-59702AC93F16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKOTDOC", "SKOTDOC\SKOTDOC.csproj", "{646B8EEC-54E2-4309-9DC3-59702AC93F16}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottClayton.CAPTCHA.Tests", "ScottClayton.CAPTCHA.Tests\ScottClayton.CAPTCHA.Tests.csproj", "{B1973498-6187-4110-A4C5-3F943F389841}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBL.Core.Tests", "ScottClayton.CAPTCHA.Tests\CBL.Core.Tests.csproj", "{B1973498-6187-4110-A4C5-3F943F389841}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,16 +47,6 @@ Global
 		{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}.Release|x86.ActiveCfg = Release|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0B8DD132-31FE-4C61-98C0-15BA4474F891}.Release|x86.ActiveCfg = Release|Any CPU
 		{3AD05C07-8B64-4EBD-9909-2016D5F737CF}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{3AD05C07-8B64-4EBD-9909-2016D5F737CF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{3AD05C07-8B64-4EBD-9909-2016D5F737CF}.Debug|Mixed Platforms.Build.0 = Debug|x86

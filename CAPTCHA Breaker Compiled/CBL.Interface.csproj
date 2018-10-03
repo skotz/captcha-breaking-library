@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{625D5992-52E2-42F7-96B1-B5DE9DBD8168}</ProjectGuid>
+    <ProjectGuid>{469CBBE7-9115-4B07-B118-FA1FF6A34278}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CaptchaBreakingLibrary</RootNamespace>
-    <AssemblyName>CAPTCHA Breaking Library 2012</AssemblyName>
+    <RootNamespace>CBL.Interface</RootNamespace>
+    <AssemblyName>cblgui</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon01.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -82,11 +85,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScottClayton.CAPTCHA\ScottClayton.CAPTCHA.csproj">
-      <Project>{AA8BF059-8E9F-4618-9E6D-90724A32D6C6}</Project>
-      <Name>ScottClayton.CAPTCHA</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+    <Content Include="icon01.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CAPTCHA Language Interpreter\CBL.Interpreter.csproj">
+      <Project>{3AD05C07-8B64-4EBD-9909-2016D5F737CF}</Project>
+      <Name>CBL.Interpreter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
