@@ -1,0 +1,3 @@
+update setup scripts
+update zip build scripts
+fix emgu-image references

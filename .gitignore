@@ -16,3 +16,4 @@ Examples/Color CAPTCHA/*.dll
 Examples/Color CAPTCHA/*.exe
 Examples/Color CAPTCHA/ERROR.txt
 packages/
+TestResults/
