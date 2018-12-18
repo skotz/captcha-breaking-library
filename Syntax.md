@@ -500,7 +500,7 @@ C3 | Whole Number | The lower-right value of the 3x3 kernel.
 Crop the image. 
 
 ### Overload 1
-    CROP, X, Width, Height
+    CROP, X, Y, Width, Height
 
 #### Description
 Crop the image to a given rectangle.
@@ -509,6 +509,7 @@ Crop the image to a given rectangle.
 Name | Type | Description
 ----- | ----- | -----
 X | Whole Number | The left side of the rectangle.
+Y | Whole Number | The top side of the rectangle.
 Width | Whole Number | The width of the rectangle.
 Height | Whole Number | The height of the rectangle.
 
